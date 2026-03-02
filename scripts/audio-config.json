@@ -1,0 +1,20 @@
+{
+  "regions": {
+    "roanoke-valley": {
+      "species": {
+        "wood-frog":                    { "taxonIds": [66012] },
+        "spring-peeper":                { "taxonIds": [24268] },
+        "upland-chorus-frog":           { "taxonIds": [24263] },
+        "american-toad":                { "taxonIds": [64968] },
+        "fowlers-toad":                 { "taxonIds": [64977] },
+        "pickerel-frog":                { "taxonIds": [66002] },
+        "eastern-spadefoot":            { "taxonIds": [26695] },
+        "eastern-cricket-frog":         { "taxonIds": [24233] },
+        "gray-treefrog-complex":        { "taxonIds": [1668922, 1668923] },
+        "green-frog":                   { "taxonIds": [65982] },
+        "american-bullfrog":            { "taxonIds": [65979] },
+        "coastal-plains-leopard-frog":  { "taxonIds": [60341] }
+      }
+    }
+  }
+}

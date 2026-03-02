@@ -1,4 +1,4 @@
-import type { Region } from '../../types';
+import type { Region, Species } from '../../types';
 import { woodFrog } from '../species/wood-frog';
 import { springPeeper } from '../species/spring-peeper';
 import { uplandChorusFrog } from '../species/upland-chorus-frog';
@@ -11,6 +11,15 @@ import { grayTreefrogComplex } from '../species/gray-treefrog-complex';
 import { greenFrog } from '../species/green-frog';
 import { americanBullfrog } from '../species/american-bullfrog';
 import { coastalPlainsLeopardFrog } from '../species/coastal-plains-leopard-frog';
+import audioManifest from '../audio/roanoke-valley.json';
+
+type AudioManifest = typeof audioManifest;
+
+function withAudio(species: Species): Species {
+  const key = species.id as keyof AudioManifest;
+  const audio = audioManifest[key];
+  return audio ? { ...species, audio } : species;
+}
 
 export const roanokeValley: Region = {
   id: 'roanoke-valley',
@@ -28,5 +37,5 @@ export const roanokeValley: Region = {
     greenFrog,
     americanBullfrog,
     coastalPlainsLeopardFrog,
-  ],
+  ].map(withAudio),
 };
