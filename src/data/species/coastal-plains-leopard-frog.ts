@@ -6,12 +6,12 @@ export const coastalPlainsLeopardFrog: Species = {
   scientificName: 'Lithobates sphenocephalus',
   audio: [
     {
-      file: 'roanoke-valley/coastal-plains-leopard-frog-1.m4a',
-      attribution: '© Ty Smith / iNaturalist, CC-BY-NC 4.0 (observation #40006709)',
+      file: 'roanoke-valley/coastal-plains-leopard-frog-1.wav',
+      attribution: '© Mike Tilley / iNaturalist, CC-BY 4.0 (observation #70261132)',
     },
     {
       file: 'roanoke-valley/coastal-plains-leopard-frog-2.m4a',
-      attribution: '© Dan Johnson / iNaturalist, CC-BY 4.0 (observation #216063798)',
+      attribution: '© adeleaquino / iNaturalist, CC-BY-NC 4.0 (observation #320842838)',
     },
   ],
   photos: [

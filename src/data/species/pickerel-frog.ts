@@ -6,8 +6,12 @@ export const pickerelFrog: Species = {
   scientificName: 'Lithobates palustris',
   audio: [
     {
-      file: 'roanoke-valley/pickerel-frog-1.mp3',
-      attribution: '© Guy Babineau / iNaturalist, CC-BY 4.0 (observation #43225665)',
+      file: 'roanoke-valley/pickerel-frog-1.wav',
+      attribution: '© Dale A Morgan / iNaturalist, CC-BY-NC 4.0 (observation #112828059)',
+    },
+    {
+      file: 'roanoke-valley/pickerel-frog-2.m4a',
+      attribution: '© kkrehbielb / iNaturalist, CC-BY-NC 4.0 (observation #202955723)',
     },
   ],
   photos: [
