@@ -150,60 +150,60 @@ export function AdminPage() {
               {/* ── Photo section ── */}
               <div className="px-4 pb-4 border-t border-gray-100 pt-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
-                  Practice background photo
-                  {visiblePhotos.length > 0 && (
-                    <span className="normal-case font-normal ml-1 text-green-600">— click to select</span>
-                  )}
+                  Photos — {visiblePhotos.length} candidate{visiblePhotos.length !== 1 ? 's' : ''}
                 </p>
 
                 {visiblePhotos.length === 0 ? (
-                  <p className="text-xs text-gray-400 italic">
-                    No downloaded photos yet.{' '}
+                  <p className="text-sm text-gray-400 italic mb-3">
+                    No photos yet.{' '}
+                    Run <code className="bg-gray-100 px-1 rounded">node scripts/fetch-photos-wiki.mjs</code> or{' '}
                     <code className="bg-gray-100 px-1 rounded">node scripts/fetch-photos.mjs</code>
                   </p>
                 ) : (
-                  <div className="flex flex-wrap gap-2">
+                  <ul className="divide-y divide-gray-100 mb-3">
                     {visiblePhotos.map((photo, i) => {
                       const isSelected = i === selectedIdx;
                       const isBusySelect = busy === `photo-select:${species.id}`;
                       const isBusyRemove = busy === `photo-rm:${photo.file}`;
+                      const isWiki = photo.file.includes('-wiki-');
                       return (
-                        <div key={photo.file} className="relative group">
+                        <li key={photo.file} className={`flex items-center gap-3 py-2 ${isSelected ? 'bg-green-50 -mx-1 px-1 rounded' : ''}`}>
+                          <img
+                            src={`/photos/${photo.file}`}
+                            alt={species.commonName}
+                            className="flex-shrink-0 w-16 h-12 object-cover rounded border border-gray-200"
+                            onError={e => { (e.target as HTMLImageElement).src = ''; }}
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-mono text-gray-600 truncate">
+                              {photo.file.split('/').pop()}
+                              {isWiki && <span className="ml-1 text-blue-400 not-italic font-sans">[wiki]</span>}
+                            </p>
+                            <p className="text-xs text-gray-400 truncate mt-0.5">{photo.attribution}</p>
+                            <p className="text-xs text-gray-300">{photo.license}</p>
+                          </div>
                           <button
                             onClick={() => handleSelectPhoto(species, i)}
                             disabled={isBusySelect}
-                            className={`block rounded-lg overflow-hidden border-2 transition-all focus:outline-none focus:ring-2 focus:ring-green-400 ${
-                              isSelected ? 'border-green-500 ring-2 ring-green-400' : 'border-transparent hover:border-green-300'
+                            className={`flex-shrink-0 text-xs px-2 py-1 rounded border transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-50 ${
+                              isSelected
+                                ? 'bg-green-500 text-white border-green-500'
+                                : 'text-green-600 border-green-300 hover:bg-green-50'
                             }`}
-                            title={photo.attribution}
                           >
-                            <img
-                              src={`/photos/${photo.file}`}
-                              alt={species.commonName}
-                              className="w-24 h-20 object-cover"
-                              onError={e => { (e.target as HTMLImageElement).src = ''; }}
-                            />
+                            {isSelected ? '✓ Selected' : 'Select'}
                           </button>
-
-                          {isSelected && (
-                            <span className="absolute top-1 left-1 bg-green-500 text-white text-xs px-1 rounded pointer-events-none">
-                              ✓
-                            </span>
-                          )}
-
-                          {/* Remove photo button — appears on hover */}
                           <button
                             onClick={() => handleRemovePhoto(species, photo)}
                             disabled={isBusyRemove}
-                            className="absolute top-1 right-1 w-5 h-5 bg-black/60 hover:bg-red-600 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-none"
-                            title="Remove photo"
+                            className="flex-shrink-0 text-xs text-red-500 hover:text-red-700 border border-red-200 hover:border-red-400 px-2 py-1 rounded transition-colors focus:outline-none disabled:opacity-50"
                           >
-                            ×
+                            {isBusyRemove ? '…' : 'Remove'}
                           </button>
-                        </div>
+                        </li>
                       );
                     })}
-                  </div>
+                  </ul>
                 )}
               </div>
             </div>

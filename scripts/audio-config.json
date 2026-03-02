@@ -2,18 +2,66 @@
   "regions": {
     "roanoke-valley": {
       "species": {
-        "wood-frog":                    { "taxonIds": [66012] },
-        "spring-peeper":                { "taxonIds": [24268] },
-        "upland-chorus-frog":           { "taxonIds": [24263] },
-        "american-toad":                { "taxonIds": [64968] },
-        "fowlers-toad":                 { "taxonIds": [64977] },
-        "pickerel-frog":                { "taxonIds": [66002] },
-        "eastern-spadefoot":            { "taxonIds": [26695] },
-        "eastern-cricket-frog":         { "taxonIds": [24233] },
-        "gray-treefrog-complex":        { "taxonIds": [1668922, 1668923] },
-        "green-frog":                   { "taxonIds": [65982] },
-        "american-bullfrog":            { "taxonIds": [65979] },
-        "coastal-plains-leopard-frog":  { "taxonIds": [60341] }
+        "wood-frog": {
+          "taxonIds": [66012],
+          "scientificName": "Lithobates sylvaticus",
+          "wikiCategories": ["Lithobates sylvaticus", "Rana sylvatica"]
+        },
+        "spring-peeper": {
+          "taxonIds": [24268],
+          "scientificName": "Pseudacris crucifer",
+          "wikiCategories": ["Pseudacris crucifer"]
+        },
+        "upland-chorus-frog": {
+          "taxonIds": [24263],
+          "scientificName": "Pseudacris feriarum",
+          "wikiCategories": ["Pseudacris feriarum"]
+        },
+        "american-toad": {
+          "taxonIds": [64968],
+          "scientificName": "Anaxyrus americanus",
+          "wikiCategories": ["Anaxyrus americanus", "Bufo americanus"]
+        },
+        "fowlers-toad": {
+          "taxonIds": [64977],
+          "scientificName": "Anaxyrus fowleri",
+          "wikiCategories": ["Anaxyrus fowleri", "Bufo fowleri"]
+        },
+        "pickerel-frog": {
+          "taxonIds": [66002],
+          "scientificName": "Lithobates palustris",
+          "wikiCategories": ["Lithobates palustris", "Rana palustris"]
+        },
+        "eastern-spadefoot": {
+          "taxonIds": [26695],
+          "scientificName": "Scaphiopus holbrookii",
+          "wikiCategories": ["Scaphiopus holbrookii"]
+        },
+        "eastern-cricket-frog": {
+          "taxonIds": [24233],
+          "scientificName": "Acris crepitans",
+          "wikiCategories": ["Acris crepitans"]
+        },
+        "gray-treefrog-complex": {
+          "taxonIds": [1668922, 1668923],
+          "scientificName": "Hyla versicolor / Hyla chrysoscelis",
+          "wikiCategories": ["Hyla versicolor", "Hyla chrysoscelis"]
+        },
+        "green-frog": {
+          "taxonIds": [65982],
+          "scientificName": "Lithobates clamitans",
+          "wikiCategories": ["Lithobates clamitans", "Rana clamitans"]
+        },
+        "american-bullfrog": {
+          "taxonIds": [65979],
+          "scientificName": "Lithobates catesbeianus",
+          "wikiCategories": ["Lithobates catesbeianus", "Rana catesbeiana"]
+        },
+        "coastal-plains-leopard-frog": {
+          "taxonIds": [60341],
+          "scientificName": "Lithobates sphenocephalus",
+          "wikiCategories": ["Lithobates sphenocephalus", "Rana sphenocephala"]
+        }
       }
     }
   }
