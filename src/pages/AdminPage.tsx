@@ -3,130 +3,209 @@ import { useNavigate } from 'react-router-dom';
 import type { AudioCredit, Species } from '../types';
 import { REGIONS } from '../data';
 import { useSoundboard } from '../hooks/useSoundboard';
+import photoManifestRaw from '../data/photos/roanoke-valley.json';
 
-interface RemoveState {
-  speciesId: string;
-  file: string;
-}
+type PhotoEntry = { file: string; attribution: string; license: string };
+type PhotoManifest = Record<string, { selected: number; photos: PhotoEntry[] }>;
+const photoManifest: PhotoManifest = photoManifestRaw as PhotoManifest;
 
 export function AdminPage() {
   const navigate = useNavigate();
   const { activeId, isPlaying, toggle } = useSoundboard();
-  const [removing, setRemoving] = useState<RemoveState | null>(null);
-  const [removed, setRemoved] = useState<Set<string>>(new Set());
+  const [audioRemoved, setAudioRemoved] = useState<Set<string>>(new Set());
+  const [photoRemoved, setPhotoRemoved] = useState<Set<string>>(new Set());
+  const [selectedPhotos, setSelectedPhotos] = useState<Record<string, number>>(
+    () => Object.fromEntries(Object.entries(photoManifest).map(([k, v]) => [k, v.selected]))
+  );
+  const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Use first region; extend if multi-region support needed
   const region = REGIONS[0]!;
 
-  async function handleRemove(species: Species, audio: AudioCredit) {
-    setRemoving({ speciesId: species.id, file: audio.file });
-    setError(null);
-    try {
-      const res = await fetch('/api/admin/remove-audio', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ regionId: region.id, speciesId: species.id, file: audio.file }),
-      });
-      if (!res.ok) throw new Error(await res.text());
-      setRemoved(prev => new Set([...prev, audio.file]));
-    } catch (err) {
-      setError(String(err));
-    } finally {
-      setRemoving(null);
-    }
+  async function post(endpoint: string, body: object) {
+    const res = await fetch(`/api/admin/${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error(await res.text());
   }
 
-  const totalSamples = region.species.reduce((n, s) => n + s.audio.length, 0);
-  const removedCount = removed.size;
+  async function handleRemoveAudio(species: Species, audio: AudioCredit) {
+    const key = `audio:${audio.file}`;
+    setBusy(key); setError(null);
+    try {
+      await post('remove-audio', { regionId: region.id, speciesId: species.id, file: audio.file });
+      setAudioRemoved(prev => new Set([...prev, audio.file]));
+    } catch (err) { setError(String(err)); }
+    finally { setBusy(null); }
+  }
+
+  async function handleSelectPhoto(species: Species, index: number) {
+    const key = `photo-select:${species.id}`;
+    setBusy(key); setError(null);
+    try {
+      await post('select-photo', { regionId: region.id, speciesId: species.id, index });
+      setSelectedPhotos(prev => ({ ...prev, [species.id]: index }));
+    } catch (err) { setError(String(err)); }
+    finally { setBusy(null); }
+  }
+
+  async function handleRemovePhoto(species: Species, photo: PhotoEntry) {
+    const key = `photo-rm:${photo.file}`;
+    setBusy(key); setError(null);
+    try {
+      await post('remove-photo', { regionId: region.id, speciesId: species.id, file: photo.file });
+      setPhotoRemoved(prev => new Set([...prev, photo.file]));
+      // If we removed the selected photo, reset selection to 0
+      const remaining = (photoManifest[species.id]?.photos ?? []).filter(p => !photoRemoved.has(p.file) && p.file !== photo.file);
+      const sel = selectedPhotos[species.id] ?? 0;
+      if (sel >= remaining.length) setSelectedPhotos(prev => ({ ...prev, [species.id]: Math.max(0, remaining.length - 1) }));
+    } catch (err) { setError(String(err)); }
+    finally { setBusy(null); }
+  }
+
+  const totalAudio = region.species.reduce((n, s) => n + s.audio.filter(a => !audioRemoved.has(a.file)).length, 0);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-gray-800 text-white px-6 py-3 flex items-center justify-between shadow-md">
-        <button
-          onClick={() => navigate('/')}
-          className="text-gray-300 hover:text-white text-sm underline focus:outline-none"
-        >
+        <button onClick={() => navigate('/')} className="text-gray-300 hover:text-white text-sm underline focus:outline-none">
           ← Home
         </button>
         <div className="text-center">
-          <span className="font-semibold">Audio Admin</span>
+          <span className="font-semibold">Audio + Photo Admin</span>
           <span className="text-gray-400 text-xs ml-2">(dev only)</span>
         </div>
-        <span className="text-sm text-gray-400">
-          {totalSamples - removedCount} samples
-        </span>
+        <span className="text-sm text-gray-400">{totalAudio} samples</span>
       </header>
 
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-800 px-4 py-2 text-sm mx-4 mt-3 rounded">
-          {error}
-        </div>
+        <div className="bg-red-100 border border-red-400 text-red-800 px-4 py-2 text-sm mx-4 mt-3 rounded">{error}</div>
       )}
 
-      <main className="flex-1 p-4 sm:p-6 max-w-3xl mx-auto w-full space-y-6">
+      <main className="flex-1 p-4 sm:p-6 max-w-3xl mx-auto w-full space-y-8">
         <p className="text-sm text-gray-500">
-          Play each sample and remove any that are silent, noisy, or misidentified.
-          Changes are written immediately — reload the app to see the updated list.
+          Play each audio sample and remove bad ones. Select the best photo for each species' practice pad.
+          Run <code className="bg-gray-100 px-1 rounded">node scripts/fetch-photos.mjs</code> to download photos.
         </p>
 
         {region.species.map(species => {
-          const visibleAudio = species.audio.filter(a => !removed.has(a.file));
+          const visibleAudio = species.audio.filter(a => !audioRemoved.has(a.file));
+          const photoEntry = photoManifest[species.id];
+          const visiblePhotos = (photoEntry?.photos ?? []).filter(p => !photoRemoved.has(p.file));
+          const selectedIdx = selectedPhotos[species.id] ?? 0;
+
           return (
             <div key={species.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+              {/* Species header */}
               <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-baseline gap-2">
                 <span className="font-semibold text-gray-800">{species.commonName}</span>
                 <span className="text-xs italic text-gray-400">{species.scientificName}</span>
-                <span className="ml-auto text-xs text-gray-400">
-                  {visibleAudio.length} sample{visibleAudio.length !== 1 ? 's' : ''}
-                </span>
               </div>
 
-              {visibleAudio.length === 0 ? (
-                <p className="px-4 py-3 text-sm text-red-500 italic">No samples remaining</p>
-              ) : (
-                <ul className="divide-y divide-gray-100">
-                  {visibleAudio.map(audio => {
-                    const isThisPlaying = activeId === `${species.id}::${audio.file}` && isPlaying;
-                    const isRemoving = removing?.file === audio.file;
-                    return (
-                      <li key={audio.file} className="flex items-center gap-3 px-4 py-3">
-                        <button
-                          onClick={() => toggle(`${species.id}::${audio.file}`, [audio])}
-                          aria-label={isThisPlaying ? 'Stop' : 'Play'}
-                          className={`
-                            flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center
-                            transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1
-                            ${isThisPlaying
-                              ? 'bg-green-500 text-white focus:ring-green-400'
-                              : 'bg-gray-100 hover:bg-green-100 text-gray-600 focus:ring-gray-300'
-                            }
-                          `}
-                        >
-                          {isThisPlaying ? <PauseIcon /> : <PlayIcon />}
-                        </button>
+              {/* ── Audio section ── */}
+              <div className="px-4 pt-3 pb-1">
+                <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+                  Audio — {visibleAudio.length} sample{visibleAudio.length !== 1 ? 's' : ''}
+                </p>
+                {visibleAudio.length === 0
+                  ? <p className="text-sm text-red-500 italic mb-3">No samples remaining</p>
+                  : (
+                    <ul className="divide-y divide-gray-100 mb-3">
+                      {visibleAudio.map(audio => {
+                        const padId = `${species.id}::${audio.file}`;
+                        const thisPlaying = activeId === padId && isPlaying;
+                        const isBusy = busy === `audio:${audio.file}`;
+                        return (
+                          <li key={audio.file} className="flex items-center gap-3 py-2">
+                            <button
+                              onClick={() => toggle(padId, audio)}
+                              aria-label={thisPlaying ? 'Stop' : 'Play'}
+                              className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors focus:outline-none focus:ring-2 ${
+                                thisPlaying ? 'bg-green-500 text-white' : 'bg-gray-100 hover:bg-green-100 text-gray-600'
+                              }`}
+                            >
+                              {thisPlaying ? <PauseIcon /> : <PlayIcon />}
+                            </button>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs font-mono text-gray-600 truncate">{audio.file.split('/').pop()}</p>
+                              <p className="text-xs text-gray-400 truncate mt-0.5">{audio.attribution}</p>
+                            </div>
+                            <button
+                              onClick={() => handleRemoveAudio(species, audio)}
+                              disabled={isBusy}
+                              className="flex-shrink-0 text-xs text-red-500 hover:text-red-700 border border-red-200 hover:border-red-400 px-2 py-1 rounded transition-colors focus:outline-none disabled:opacity-50"
+                            >
+                              {isBusy ? '…' : 'Remove'}
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )
+                }
+              </div>
 
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-mono text-gray-600 truncate">
-                            {audio.file.split('/').pop()}
-                          </p>
-                          <p className="text-xs text-gray-400 truncate mt-0.5">
-                            {audio.attribution}
-                          </p>
+              {/* ── Photo section ── */}
+              <div className="px-4 pb-4 border-t border-gray-100 pt-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+                  Practice background photo
+                  {visiblePhotos.length > 0 && (
+                    <span className="normal-case font-normal ml-1 text-green-600">— click to select</span>
+                  )}
+                </p>
+
+                {visiblePhotos.length === 0 ? (
+                  <p className="text-xs text-gray-400 italic">
+                    No downloaded photos yet.{' '}
+                    <code className="bg-gray-100 px-1 rounded">node scripts/fetch-photos.mjs</code>
+                  </p>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {visiblePhotos.map((photo, i) => {
+                      const isSelected = i === selectedIdx;
+                      const isBusySelect = busy === `photo-select:${species.id}`;
+                      const isBusyRemove = busy === `photo-rm:${photo.file}`;
+                      return (
+                        <div key={photo.file} className="relative group">
+                          <button
+                            onClick={() => handleSelectPhoto(species, i)}
+                            disabled={isBusySelect}
+                            className={`block rounded-lg overflow-hidden border-2 transition-all focus:outline-none focus:ring-2 focus:ring-green-400 ${
+                              isSelected ? 'border-green-500 ring-2 ring-green-400' : 'border-transparent hover:border-green-300'
+                            }`}
+                            title={photo.attribution}
+                          >
+                            <img
+                              src={`/photos/${photo.file}`}
+                              alt={species.commonName}
+                              className="w-24 h-20 object-cover"
+                              onError={e => { (e.target as HTMLImageElement).src = ''; }}
+                            />
+                          </button>
+
+                          {isSelected && (
+                            <span className="absolute top-1 left-1 bg-green-500 text-white text-xs px-1 rounded pointer-events-none">
+                              ✓
+                            </span>
+                          )}
+
+                          {/* Remove photo button — appears on hover */}
+                          <button
+                            onClick={() => handleRemovePhoto(species, photo)}
+                            disabled={isBusyRemove}
+                            className="absolute top-1 right-1 w-5 h-5 bg-black/60 hover:bg-red-600 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-none"
+                            title="Remove photo"
+                          >
+                            ×
+                          </button>
                         </div>
-
-                        <button
-                          onClick={() => handleRemove(species, audio)}
-                          disabled={isRemoving}
-                          className="flex-shrink-0 text-xs text-red-500 hover:text-red-700 border border-red-200 hover:border-red-400 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-300 disabled:opacity-50"
-                        >
-                          {isRemoving ? '…' : 'Remove'}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}
@@ -136,17 +215,8 @@ export function AdminPage() {
 }
 
 function PlayIcon() {
-  return (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
+  return <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>;
 }
-
 function PauseIcon() {
-  return (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-    </svg>
-  );
+  return <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>;
 }

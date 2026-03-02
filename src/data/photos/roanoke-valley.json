@@ -1,0 +1,362 @@
+{
+  "american-bullfrog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/american-bullfrog-photo-1.jpeg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/american-bullfrog-photo-2.jpeg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/american-bullfrog-photo-3.jpeg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/american-bullfrog-photo-4.jpeg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/american-bullfrog-photo-5.jpg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "green-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/green-frog-photo-1.jpg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/green-frog-photo-2.jpeg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/green-frog-photo-3.jpeg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/green-frog-photo-4.jpeg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/green-frog-photo-5.jpeg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "pickerel-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/pickerel-frog-photo-1.jpeg",
+        "attribution": "(c) J.D. Willson, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/pickerel-frog-photo-2.jpg",
+        "attribution": "(c) Ryan Frohlich, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/pickerel-frog-photo-3.jpg",
+        "attribution": "(c) J.D. Willson, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/pickerel-frog-photo-4.jpg",
+        "attribution": "(c) J.D. Willson, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/pickerel-frog-photo-5.jpg",
+        "attribution": "(c) belyykit, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "wood-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/wood-frog-photo-1.jpg",
+        "attribution": "(c) Ashley, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/wood-frog-photo-2.jpg",
+        "attribution": "(c) Erin Talmage, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/wood-frog-photo-3.jpg",
+        "attribution": "(c) Erin Talmage, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/wood-frog-photo-4.jpeg",
+        "attribution": "(c) Katherine Stroh, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/wood-frog-photo-5.jpg",
+        "attribution": "(c) Mason Lee, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "gray-treefrog-complex": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/gray-treefrog-complex-photo-1.jpg",
+        "attribution": "(c) Rich Stevenson, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/gray-treefrog-complex-photo-2.jpg",
+        "attribution": "(c) car39385, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/gray-treefrog-complex-photo-3.jpg",
+        "attribution": "(c) car39385, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/gray-treefrog-complex-photo-4.jpg",
+        "attribution": "(c) Amber Miller, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/gray-treefrog-complex-photo-5.jpg",
+        "attribution": "(c) Patrick Coin, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "spring-peeper": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/spring-peeper-photo-1.jpg",
+        "attribution": "(c) Laura J. Costello, some rights reserved (CC BY)",
+        "license": "cc-by"
+      },
+      {
+        "file": "roanoke-valley/spring-peeper-photo-2.jpg",
+        "attribution": "(c) Laura J. Costello, some rights reserved (CC BY)",
+        "license": "cc-by"
+      },
+      {
+        "file": "roanoke-valley/spring-peeper-photo-3.jpg",
+        "attribution": "(c) Laura J. Costello, some rights reserved (CC BY)",
+        "license": "cc-by"
+      },
+      {
+        "file": "roanoke-valley/spring-peeper-photo-4.jpg",
+        "attribution": "(c) rereedy, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/spring-peeper-photo-5.jpg",
+        "attribution": "(c) Gianna Coppola, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "upland-chorus-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/upland-chorus-frog-photo-1.jpg",
+        "attribution": "(c) Amber Miller, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/upland-chorus-frog-photo-2.jpg",
+        "attribution": "(c) kerakis, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/upland-chorus-frog-photo-3.jpg",
+        "attribution": "(c) kerakis, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/upland-chorus-frog-photo-4.jpeg",
+        "attribution": "(c) kerakis, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/upland-chorus-frog-photo-5.jpg",
+        "attribution": "(c) Matthew, some rights reserved (CC BY)",
+        "license": "cc-by"
+      }
+    ]
+  },
+  "american-toad": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/american-toad-photo-1.jpeg",
+        "attribution": "no rights reserved",
+        "license": "cc0"
+      },
+      {
+        "file": "roanoke-valley/american-toad-photo-2.jpeg",
+        "attribution": "(c) joannerusso, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/american-toad-photo-3.jpeg",
+        "attribution": "(c) David Tibbetts, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/american-toad-photo-4.jpg",
+        "attribution": "(c) Jay Heiser, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/american-toad-photo-5.jpg",
+        "attribution": "(c) Jay Heiser, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "fowlers-toad": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/fowlers-toad-photo-1.jpeg",
+        "attribution": "(c) Hayden Al Harash, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/fowlers-toad-photo-2.jpeg",
+        "attribution": "(c) Hayden Al Harash, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/fowlers-toad-photo-3.jpeg",
+        "attribution": "(c) Kaiju, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/fowlers-toad-photo-4.jpg",
+        "attribution": "(c) Brenda Bull, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/fowlers-toad-photo-5.jpg",
+        "attribution": "(c) Brenda Bull, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "eastern-spadefoot": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/eastern-spadefoot-photo-1.jpeg",
+        "attribution": "(c) Adam Gabriel, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/eastern-spadefoot-photo-2.jpg",
+        "attribution": "(c) Grover J. Brown, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/eastern-spadefoot-photo-3.jpg",
+        "attribution": "(c) Ken-ichi Ueda, some rights reserved (CC BY)",
+        "license": "cc-by"
+      },
+      {
+        "file": "roanoke-valley/eastern-spadefoot-photo-4.jpg",
+        "attribution": "(c) Ken-ichi Ueda, some rights reserved (CC BY)",
+        "license": "cc-by"
+      },
+      {
+        "file": "roanoke-valley/eastern-spadefoot-photo-5.jpg",
+        "attribution": "(c) Riley Stanton, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "eastern-cricket-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/eastern-cricket-frog-photo-1.jpeg",
+        "attribution": "(c) Michiko, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/eastern-cricket-frog-photo-2.jpeg",
+        "attribution": "(c) Michiko, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/eastern-cricket-frog-photo-3.jpeg",
+        "attribution": "(c) Michiko, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/eastern-cricket-frog-photo-4.jpg",
+        "attribution": "(c) jonmorr, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/eastern-cricket-frog-photo-5.jpg",
+        "attribution": "(c) G. L. Dearman, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "coastal-plains-leopard-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "roanoke-valley/coastal-plains-leopard-frog-photo-1.jpg",
+        "attribution": "(c) benmf, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/coastal-plains-leopard-frog-photo-2.jpg",
+        "attribution": "(c) Dave Almquist, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/coastal-plains-leopard-frog-photo-3.jpg",
+        "attribution": "(c) jaypcavecrawler, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/coastal-plains-leopard-frog-photo-4.jpg",
+        "attribution": "(c) jaypcavecrawler, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "roanoke-valley/coastal-plains-leopard-frog-photo-5.jpg",
+        "attribution": "(c) Thomas Shahan, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  }
+}

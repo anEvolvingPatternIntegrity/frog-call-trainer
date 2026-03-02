@@ -23,20 +23,18 @@ export function useSoundboard() {
     };
   }, []);
 
-  function toggle(speciesId: string, audioFiles: AudioCredit[]) {
+  // Caller selects which specific sample to play — no random picking here.
+  function toggle(speciesId: string, audioFile: AudioCredit) {
     const audio = audioRef.current;
     if (!audio) return;
 
-    // Tapping the currently-playing pad stops it
     if (speciesId === activeId && isPlaying) {
       audio.pause();
       return;
     }
 
-    // Pick a random sample from the available files
-    const file = audioFiles[Math.floor(Math.random() * audioFiles.length)]!;
     audio.pause();
-    audio.src = `/audio/${file.file}`;
+    audio.src = `/audio/${audioFile.file}`;
     audio.currentTime = 0;
     setActiveId(speciesId);
     audio.play().catch(() => {});
