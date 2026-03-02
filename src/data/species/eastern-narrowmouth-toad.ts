@@ -6,8 +6,12 @@ export const easternNarrowmouthToad: Species = {
   scientificName: 'Gastrophryne carolinensis',
   audio: [
     {
-      file: 'roanoke-valley/eastern-narrowmouth-toad-1.wav',
-      attribution: '© Jason J Brunet / iNaturalist, CC-BY-NC 4.0 (observation #604667)',
+      file: 'roanoke-valley/eastern-narrowmouth-toad-1.m4a',
+      attribution: '© Laura Mae / iNaturalist, CC-BY 4.0 (observation #171008914)',
+    },
+    {
+      file: 'roanoke-valley/eastern-narrowmouth-toad-2.m4a',
+      attribution: '© Laura Mae / iNaturalist, CC-BY 4.0 (observation #171008914)',
     },
   ],
   photos: [
