@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { AudioCredit, Species } from '../types';
 import { REGIONS } from '../data';
@@ -19,6 +19,14 @@ export function AdminPage() {
   );
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<{ src: string; attribution: string } | null>(null);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    function onKey(e: KeyboardEvent) { if (e.key === 'Escape') setLightbox(null); }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox]);
 
   const region = REGIONS[0]!;
 
@@ -168,12 +176,18 @@ export function AdminPage() {
                       const isWiki = photo.file.includes('-wiki-');
                       return (
                         <li key={photo.file} className={`flex items-center gap-3 py-2 ${isSelected ? 'bg-green-50 -mx-1 px-1 rounded' : ''}`}>
-                          <img
-                            src={`/photos/${photo.file}`}
-                            alt={species.commonName}
-                            className="flex-shrink-0 w-16 h-12 object-cover rounded border border-gray-200"
-                            onError={e => { (e.target as HTMLImageElement).src = ''; }}
-                          />
+                          <button
+                            onClick={() => setLightbox({ src: `/photos/${photo.file}`, attribution: photo.attribution })}
+                            className="flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                            title="Click to enlarge"
+                          >
+                            <img
+                              src={`/photos/${photo.file}`}
+                              alt={species.commonName}
+                              className="w-16 h-12 object-cover rounded border border-gray-200 hover:opacity-80 transition-opacity"
+                              onError={e => { (e.target as HTMLImageElement).src = ''; }}
+                            />
+                          </button>
                           <div className="flex-1 min-w-0">
                             <p className="text-xs font-mono text-gray-600 truncate">
                               {photo.file.split('/').pop()}
@@ -210,6 +224,29 @@ export function AdminPage() {
           );
         })}
       </main>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          onClick={() => setLightbox(null)}
+        >
+          <div className="relative max-w-4xl max-h-[90vh] mx-4" onClick={e => e.stopPropagation()}>
+            <img
+              src={lightbox.src}
+              alt=""
+              className="max-w-full max-h-[80vh] object-contain rounded shadow-2xl"
+            />
+            <p className="text-white/70 text-xs mt-2 text-center">{lightbox.attribution}</p>
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute -top-3 -right-3 w-8 h-8 bg-white text-gray-800 rounded-full text-lg font-bold flex items-center justify-center shadow-lg hover:bg-gray-100 focus:outline-none"
+              aria-label="Close"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
