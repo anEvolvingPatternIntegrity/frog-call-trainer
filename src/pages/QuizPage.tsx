@@ -7,6 +7,7 @@ import { AudioPlayer } from '../components/AudioPlayer';
 import { ChoiceGrid } from '../components/ChoiceGrid';
 import { FeedbackBanner } from '../components/FeedbackBanner';
 import { SpeciesReveal } from '../components/SpeciesReveal';
+import { AttributionFooter } from '../components/AttributionFooter';
 
 export function QuizPage() {
   const [searchParams] = useSearchParams();
@@ -194,6 +195,15 @@ export function QuizPage() {
           )}
         </div>
       </main>
+
+      <AttributionFooter
+        audio={currentQuestion.audioFile}
+        photos={
+          mode === 'training' && isAnswered && currentQuestion.species.photos[0]
+            ? [{ speciesName: currentQuestion.species.commonName, credit: currentQuestion.species.photos[0] }]
+            : []
+        }
+      />
     </div>
   );
 }

@@ -3,6 +3,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { REGIONS } from '../data';
 import { useSoundboard } from '../hooks/useSoundboard';
 import { SpeciesPad } from '../components/SpeciesPad';
+import { AttributionFooter } from '../components/AttributionFooter';
+import type { PhotoAttr } from '../components/AttributionFooter';
 
 export function PracticePage() {
   const [searchParams] = useSearchParams();
@@ -29,6 +31,15 @@ export function PracticePage() {
   function handleNext(speciesId: string, total: number) {
     setSampleIndex(speciesId, (sampleIndices[speciesId]! + 1) % total);
   }
+
+  const photoAttrs: PhotoAttr[] = region.species
+    .filter((s) => s.photos[0])
+    .map((s) => ({ speciesName: s.commonName, credit: s.photos[0]! }));
+
+  const activeSpecies = region.species.find((s) => s.id === activeId);
+  const activeAudio = activeSpecies
+    ? (activeSpecies.audio[sampleIndices[activeSpecies.id] ?? 0] ?? activeSpecies.audio[0])
+    : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-emerald-100 flex flex-col">
@@ -67,6 +78,8 @@ export function PracticePage() {
           })}
         </div>
       </main>
+
+      <AttributionFooter photos={photoAttrs} audio={activeAudio} />
     </div>
   );
 }
