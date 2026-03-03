@@ -13,7 +13,7 @@ export function PracticePage() {
   const regionId = searchParams.get('region') ?? REGIONS[0]?.id ?? '';
   const region = REGIONS.find((r) => r.id === regionId) ?? REGIONS[0]!;
 
-  const { activeId, isPlaying, toggle } = useSoundboard();
+  const { activeId, isPlaying, toggle, play } = useSoundboard();
 
   // Per-species sample index (all start at 0)
   const [sampleIndices, setSampleIndices] = useState<Record<string, number>>(() =>
@@ -25,11 +25,21 @@ export function PracticePage() {
   }
 
   function handlePrev(speciesId: string, total: number) {
-    setSampleIndex(speciesId, (sampleIndices[speciesId]! - 1 + total) % total);
+    const newIdx = (sampleIndices[speciesId]! - 1 + total) % total;
+    setSampleIndex(speciesId, newIdx);
+    if (activeId === speciesId) {
+      const species = region.species.find((s) => s.id === speciesId)!;
+      play(speciesId, species.audio[newIdx]!);
+    }
   }
 
   function handleNext(speciesId: string, total: number) {
-    setSampleIndex(speciesId, (sampleIndices[speciesId]! + 1) % total);
+    const newIdx = (sampleIndices[speciesId]! + 1) % total;
+    setSampleIndex(speciesId, newIdx);
+    if (activeId === speciesId) {
+      const species = region.species.find((s) => s.id === speciesId)!;
+      play(speciesId, species.audio[newIdx]!);
+    }
   }
 
   const photoAttrs: PhotoAttr[] = region.species

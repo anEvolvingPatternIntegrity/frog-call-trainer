@@ -40,5 +40,16 @@ export function useSoundboard() {
     audio.play().catch(() => {});
   }
 
-  return { activeId, isPlaying, toggle };
+  // Always switches to the given file and plays (used by carousel arrows).
+  function play(speciesId: string, audioFile: AudioCredit) {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.pause();
+    audio.src = `/audio/${audioFile.file}`;
+    audio.currentTime = 0;
+    setActiveId(speciesId);
+    audio.play().catch(() => {});
+  }
+
+  return { activeId, isPlaying, toggle, play };
 }
