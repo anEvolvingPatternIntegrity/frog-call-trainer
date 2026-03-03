@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Species } from '../types';
+import { SpectrogramDisplay } from './SpectrogramDisplay';
 
 interface Props {
   species: Species;
@@ -9,9 +10,11 @@ interface Props {
   onToggle: () => void;
   onPrev: () => void;
   onNext: () => void;
+  spectrogramSrc?: string;
+  audioRef?: React.RefObject<HTMLAudioElement | null>;
 }
 
-export function SpeciesPad({ species, isActive, isPlaying, sampleIndex, onToggle, onPrev, onNext }: Props) {
+export function SpeciesPad({ species, isActive, isPlaying, sampleIndex, onToggle, onPrev, onNext, spectrogramSrc, audioRef }: Props) {
   const [imgFailed, setImgFailed] = useState(false);
   const photo = species.photos[0];
   const totalSamples = species.audio.length;
@@ -25,8 +28,10 @@ export function SpeciesPad({ species, isActive, isPlaying, sampleIndex, onToggle
         ${showPulse ? 'ring-4 ring-green-400 ring-offset-2' : ''}
       `}
     >
-      {/* Background image */}
-      {photo && !imgFailed ? (
+      {/* Background: spectrogram when active, else photo or gradient */}
+      {isActive && spectrogramSrc && audioRef ? (
+        <SpectrogramDisplay imageSrc={spectrogramSrc} audioRef={audioRef} />
+      ) : photo && !imgFailed ? (
         <img
           src={photo.url}
           alt=""

@@ -13,7 +13,7 @@ export function PracticePage() {
   const regionId = searchParams.get('region') ?? REGIONS[0]?.id ?? '';
   const region = REGIONS.find((r) => r.id === regionId) ?? REGIONS[0]!;
 
-  const { activeId, isPlaying, toggle, play } = useSoundboard();
+  const { activeId, isPlaying, toggle, play, audioRef } = useSoundboard();
 
   // Per-species sample index (all start at 0)
   const [sampleIndices, setSampleIndices] = useState<Record<string, number>>(() =>
@@ -73,6 +73,7 @@ export function PracticePage() {
           {region.species.map((species) => {
             const idx = sampleIndices[species.id] ?? 0;
             const audioFile = species.audio[idx] ?? species.audio[0]!;
+            const spectrogramSrc = '/spectrograms/' + audioFile.file.replace(/\.[^.]+$/, '.png');
             return (
               <SpeciesPad
                 key={species.id}
@@ -83,6 +84,8 @@ export function PracticePage() {
                 onToggle={() => toggle(species.id, audioFile)}
                 onPrev={() => handlePrev(species.id, species.audio.length)}
                 onNext={() => handleNext(species.id, species.audio.length)}
+                spectrogramSrc={spectrogramSrc}
+                audioRef={audioRef}
               />
             );
           })}

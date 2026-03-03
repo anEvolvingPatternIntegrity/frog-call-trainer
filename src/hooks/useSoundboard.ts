@@ -51,5 +51,5 @@ export function useSoundboard() {
     audio.play().catch(() => {});
   }
 
-  return { activeId, isPlaying, toggle, play };
+  return { activeId, isPlaying, toggle, play, audioRef };
 }

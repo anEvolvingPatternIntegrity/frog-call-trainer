@@ -45,7 +45,7 @@ export function QuizPage() {
         <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm space-y-5">
           <div>
             <h2 className="text-xl font-semibold text-gray-800">
-              Frog Call Quiz
+              Frog Call Test
               {hostName && <span className="block text-sm font-normal text-gray-500 mt-0.5">Hosted by {hostName}</span>}
             </h2>
             <p className="text-sm text-gray-500 mt-2">
@@ -72,7 +72,7 @@ export function QuizPage() {
             disabled={!testerName.trim()}
             className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl text-base transition-colors focus:outline-none focus:ring-4 focus:ring-green-400 disabled:opacity-50"
           >
-            Begin Quiz
+            Begin Test
           </button>
         </div>
       </div>
@@ -161,37 +161,40 @@ export function QuizPage() {
               showAnotherSample={mode === 'training'}
               hasMultipleSamples={currentQuestion.species.audio.length > 1}
               onAnotherSample={getAnotherSample}
+              spectrogramSrc={mode === 'training' ? '/spectrograms/' + currentQuestion.audioFile.file.replace(/\.[^.]+$/, '.png') : undefined}
             />
           </div>
 
-          {/* Choices */}
-          <ChoiceGrid
-            choices={choiceOrder}
-            correctId={currentQuestion.species.id}
-            selectedId={currentAnswer?.selectedId ?? null}
-            isAnswered={isAnswered}
-            onSelect={submitAnswer}
-          />
-
-          {/* Training mode: feedback + reveal */}
-          {mode === 'training' && isAnswered && currentAnswer && (
-            <div className="space-y-3">
-              <FeedbackBanner
-                correct={currentAnswer.correct}
-                correctName={currentQuestion.species.commonName}
-              />
-              <SpeciesReveal species={currentQuestion.species} />
-            </div>
+          {/* Choices — hidden once answered */}
+          {!isAnswered && (
+            <ChoiceGrid
+              choices={choiceOrder}
+              correctId={currentQuestion.species.id}
+              selectedId={currentAnswer?.selectedId ?? null}
+              isAnswered={isAnswered}
+              onSelect={submitAnswer}
+            />
           )}
 
-          {/* Next button (shown after answering) */}
+          {/* Post-answer: feedback, reveal, and next button */}
           {isAnswered && (
-            <button
-              onClick={nextQuestion}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl text-base transition-colors focus:outline-none focus:ring-4 focus:ring-green-400"
-            >
-              {session.currentIndex < total - 1 ? 'Next Question →' : mode === 'test' ? 'See Results' : 'See Score'}
-            </button>
+            <div className="space-y-3">
+              {mode === 'training' && currentAnswer && (
+                <>
+                  <FeedbackBanner
+                    correct={currentAnswer.correct}
+                    correctName={currentQuestion.species.commonName}
+                  />
+                  <SpeciesReveal species={currentQuestion.species} />
+                </>
+              )}
+              <button
+                onClick={nextQuestion}
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl text-base transition-colors focus:outline-none focus:ring-4 focus:ring-green-400"
+              >
+                {session.currentIndex < total - 1 ? 'Next Question →' : mode === 'test' ? 'See Results' : 'See Score'}
+              </button>
+            </div>
           )}
         </div>
       </main>

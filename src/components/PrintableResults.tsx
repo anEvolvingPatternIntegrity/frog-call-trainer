@@ -22,7 +22,7 @@ export function PrintableResults({ testerName, hostName, answers, allSpecies, da
     <div className="max-w-2xl mx-auto bg-white p-6">
       {/* Header */}
       <div className="mb-6 border-b border-gray-300 pb-4">
-        <h1 className="text-2xl font-bold text-gray-800">Frog Call Quiz Results</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Frog Call Test Results</h1>
         <div className="mt-2 grid grid-cols-2 gap-1 text-sm text-gray-600">
           {testerName && <div><span className="font-medium">Name:</span> {testerName}</div>}
           {hostName && <div><span className="font-medium">Hosted by:</span> {hostName}</div>}

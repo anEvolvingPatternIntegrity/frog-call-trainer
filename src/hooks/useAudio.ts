@@ -65,5 +65,5 @@ export function useAudio(src: string | null) {
     }
   };
 
-  return { play, pause, toggle, isPlaying, isLoaded };
+  return { play, pause, toggle, isPlaying, isLoaded, audioRef };
 }
