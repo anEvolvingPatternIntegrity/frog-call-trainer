@@ -12,7 +12,11 @@ const photoManifest: PhotoManifest = photoManifestRaw as PhotoManifest;
 export function AdminPage() {
   const navigate = useNavigate();
   const { activeId, isPlaying, toggle } = useSoundboard();
+  const region = REGIONS[0]!;
   const [audioRemoved, setAudioRemoved] = useState<Set<string>>(new Set());
+  const [audioOrder, setAudioOrder] = useState<Record<string, string[]>>(() =>
+    Object.fromEntries(region.species.map((s) => [s.id, s.audio.map((a) => a.file)]))
+  );
   const [photoRemoved, setPhotoRemoved] = useState<Set<string>>(new Set());
   const [selectedPhotos, setSelectedPhotos] = useState<Record<string, number>>(
     () => Object.fromEntries(Object.entries(photoManifest).map(([k, v]) => [k, v.selected]))
@@ -28,8 +32,6 @@ export function AdminPage() {
     return () => window.removeEventListener('keydown', onKey);
   }, [lightbox]);
 
-  const region = REGIONS[0]!;
-
   async function post(endpoint: string, body: object) {
     const res = await fetch(`/api/admin/${endpoint}`, {
       method: 'POST',
@@ -37,6 +39,23 @@ export function AdminPage() {
       body: JSON.stringify(body),
     });
     if (!res.ok) throw new Error(await res.text());
+  }
+
+  async function handleMoveAudio(species: Species, file: string, direction: 'up' | 'down') {
+    setBusy(`audio-move:${file}`); setError(null);
+    try {
+      await post('reorder-audio', { regionId: region.id, speciesId: species.id, file, direction });
+      setAudioOrder((prev) => {
+        const order = [...(prev[species.id] ?? [])];
+        const idx = order.indexOf(file);
+        const newIdx = direction === 'up' ? idx - 1 : idx + 1;
+        if (idx !== -1 && newIdx >= 0 && newIdx < order.length) {
+          [order[idx], order[newIdx]] = [order[newIdx], order[idx]];
+        }
+        return { ...prev, [species.id]: order };
+      });
+    } catch (err) { setError(String(err)); }
+    finally { setBusy(null); }
   }
 
   async function handleRemoveAudio(species: Species, audio: AudioCredit) {
@@ -99,7 +118,10 @@ export function AdminPage() {
         </p>
 
         {region.species.map(species => {
-          const visibleAudio = species.audio.filter(a => !audioRemoved.has(a.file));
+          const orderedFiles = audioOrder[species.id] ?? species.audio.map((a) => a.file);
+          const visibleAudio = orderedFiles
+            .map((file) => species.audio.find((a) => a.file === file))
+            .filter((a): a is AudioCredit => a !== undefined && !audioRemoved.has(a.file));
           const photoEntry = photoManifest[species.id];
           const visiblePhotos = (photoEntry?.photos ?? []).filter(p => !photoRemoved.has(p.file));
           const selectedIdx = selectedPhotos[species.id] ?? 0;
@@ -121,12 +143,32 @@ export function AdminPage() {
                   ? <p className="text-sm text-red-500 italic mb-3">No samples remaining</p>
                   : (
                     <ul className="divide-y divide-gray-100 mb-3">
-                      {visibleAudio.map(audio => {
+                      {visibleAudio.map((audio, i) => {
                         const padId = `${species.id}::${audio.file}`;
                         const thisPlaying = activeId === padId && isPlaying;
-                        const isBusy = busy === `audio:${audio.file}`;
+                        const isBusy = busy === `audio:${audio.file}` || busy === `audio-move:${audio.file}`;
+                        const isPrimary = i === 0;
                         return (
                           <li key={audio.file} className="flex items-center gap-3 py-2">
+                            {/* Reorder buttons */}
+                            <div className="flex flex-col gap-0.5 flex-shrink-0">
+                              <button
+                                onClick={() => handleMoveAudio(species, audio.file, 'up')}
+                                disabled={isBusy || i === 0}
+                                aria-label="Move up"
+                                className="w-5 h-5 flex items-center justify-center rounded text-gray-400 hover:text-gray-700 hover:bg-gray-100 disabled:opacity-20 focus:outline-none"
+                              >
+                                <ChevronUpIcon />
+                              </button>
+                              <button
+                                onClick={() => handleMoveAudio(species, audio.file, 'down')}
+                                disabled={isBusy || i === visibleAudio.length - 1}
+                                aria-label="Move down"
+                                className="w-5 h-5 flex items-center justify-center rounded text-gray-400 hover:text-gray-700 hover:bg-gray-100 disabled:opacity-20 focus:outline-none"
+                              >
+                                <ChevronDownIcon />
+                              </button>
+                            </div>
                             <button
                               onClick={() => toggle(padId, audio)}
                               aria-label={thisPlaying ? 'Stop' : 'Play'}
@@ -137,7 +179,14 @@ export function AdminPage() {
                               {thisPlaying ? <PauseIcon /> : <PlayIcon />}
                             </button>
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs font-mono text-gray-600 truncate">{audio.file.split('/').pop()}</p>
+                              <p className="text-xs font-mono text-gray-600 truncate flex items-center gap-1.5">
+                                {audio.file.split('/').pop()}
+                                {isPrimary && (
+                                  <span className="text-[10px] font-sans font-semibold text-amber-600 bg-amber-50 border border-amber-200 px-1 rounded">
+                                    Primary
+                                  </span>
+                                )}
+                              </p>
                               <p className="text-xs text-gray-400 truncate mt-0.5">{audio.attribution}</p>
                             </div>
                             <button
@@ -256,4 +305,10 @@ function PlayIcon() {
 }
 function PauseIcon() {
   return <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>;
+}
+function ChevronUpIcon() {
+  return <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+function ChevronDownIcon() {
+  return <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }

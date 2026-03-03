@@ -68,6 +68,21 @@ export function audioAdminPlugin(): Plugin {
             fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
             ok(res);
 
+          } else if (url === '/reorder-audio') {
+            const { regionId, speciesId, file, direction } = body as { regionId: string; speciesId: string; file: string; direction: 'up' | 'down' };
+            const manifestPath = path.join(process.cwd(), 'src', 'data', 'audio', `${regionId}.json`);
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8')) as Record<string, Array<{ file: string }>>;
+            const arr = manifest[speciesId];
+            if (arr) {
+              const idx = arr.findIndex((a) => a.file === file);
+              const newIdx = direction === 'up' ? idx - 1 : idx + 1;
+              if (idx !== -1 && newIdx >= 0 && newIdx < arr.length) {
+                [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
+              }
+            }
+            fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+            ok(res);
+
           } else if (url === '/remove-photo') {
             const { regionId, speciesId, file } = body as { regionId: string; speciesId: string; file: string };
             const photoPath = path.join(process.cwd(), 'public', 'photos', file);

@@ -10,16 +10,18 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-function buildQuestions(region: Region): Question[] {
+function buildQuestions(region: Region, mode: QuizMode): Question[] {
   const shuffledSpecies = shuffle(region.species);
   return shuffledSpecies.map((species) => {
-    const audioFile = species.audio[Math.floor(Math.random() * species.audio.length)]!;
+    const audioFile = mode === 'test'
+      ? species.audio[0]!
+      : species.audio[Math.floor(Math.random() * species.audio.length)]!;
     return { species, audioFile };
   });
 }
 
 export function useQuiz(region: Region, mode: QuizMode, hostName?: string, testerName?: string) {
-  const initialQuestions = useMemo(() => buildQuestions(region), [region]);
+  const initialQuestions = useMemo(() => buildQuestions(region, mode), [region, mode]);
 
   const [session, setSession] = useState<QuizSession>({
     mode,
@@ -92,7 +94,7 @@ export function useQuiz(region: Region, mode: QuizMode, hostName?: string, teste
       hostName,
       testerName,
       region,
-      questions: buildQuestions(region),
+      questions: buildQuestions(region, mode),
       currentIndex: 0,
       answers: [],
     });
