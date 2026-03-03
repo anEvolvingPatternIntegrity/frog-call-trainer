@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Answer, Question, QuizMode, QuizSession, Region } from '../types';
 
 function shuffle<T>(arr: T[]): T[] {
@@ -30,6 +30,11 @@ export function useQuiz(region: Region, mode: QuizMode, hostName?: string, teste
     currentIndex: 0,
     answers: [],
   });
+
+  // Sync testerName into the session when it arrives (test mode name entry happens after mount)
+  useEffect(() => {
+    setSession((prev) => ({ ...prev, testerName }));
+  }, [testerName]);
 
   // The display order of choices (shuffled once per session, stable)
   const choiceOrder = useMemo(() => shuffle(region.species), [region]);
