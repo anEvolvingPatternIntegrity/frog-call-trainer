@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { REGIONS } from '../data';
+import { useOfflineCache } from '../hooks/useOfflineCache';
 
 export function HomePage() {
   const navigate = useNavigate();
   const [selectedRegionId, setSelectedRegionId] = useState<string>(REGIONS[0]?.id ?? '');
+  const selectedRegion = REGIONS.find(r => r.id === selectedRegionId) ?? REGIONS[0]!;
+  const { status, progress, download } = useOfflineCache(selectedRegion);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-emerald-100 flex flex-col">
@@ -52,6 +55,11 @@ export function HomePage() {
               onClick={() => navigate(`/quiz?region=${selectedRegionId}&mode=test`)}
             />
           </div>
+
+          {/* Offline cache */}
+          {status !== 'unavailable' && (
+            <OfflineDownload status={status} progress={progress} onDownload={download} />
+          )}
         </div>
       </main>
 
@@ -59,6 +67,51 @@ export function HomePage() {
         Audio recordings from USGS ARMI and iNaturalist contributors. Photos from Wikimedia Commons.
       </footer>
     </div>
+  );
+}
+
+function OfflineDownload({
+  status,
+  progress,
+  onDownload,
+}: {
+  status: 'idle' | 'downloading' | 'done' | 'error' | 'unavailable';
+  progress: { done: number; total: number };
+  onDownload: () => void;
+}) {
+  if (status === 'done') {
+    return (
+      <p className="text-xs text-center text-green-600">
+        ✓ Region cached for offline use
+      </p>
+    );
+  }
+
+  if (status === 'downloading') {
+    const pct = progress.total > 0 ? Math.round((progress.done / progress.total) * 100) : 0;
+    return (
+      <div className="space-y-1">
+        <div className="flex justify-between text-xs text-gray-500">
+          <span>Caching for offline use…</span>
+          <span>{pct}%</span>
+        </div>
+        <div className="w-full bg-gray-200 rounded-full h-1.5">
+          <div
+            className="bg-green-500 h-1.5 rounded-full transition-all duration-200"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <button
+      onClick={onDownload}
+      className="w-full text-sm text-green-700 border border-green-300 rounded-lg py-2 hover:bg-green-50 transition-colors focus:outline-none focus:ring-2 focus:ring-green-400"
+    >
+      ↓ Download region for offline use
+    </button>
   );
 }
 
