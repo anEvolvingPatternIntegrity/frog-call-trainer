@@ -13,10 +13,6 @@
       "attribution": "(c) Kat, some rights reserved (CC BY-NC)"
     },
     {
-      "file": "american-bullfrog/american-bullfrog-4.mp3",
-      "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)"
-    },
-    {
       "file": "american-bullfrog/american-bullfrog-5.mp3",
       "attribution": "(c) Sven Eisenbiegler, einige Rechte vorbehalten (CC BY-NC)"
     },
@@ -37,22 +33,6 @@
     {
       "file": "green-frog/green-frog-3.mp3",
       "attribution": "(c) David Bree, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "green-frog/green-frog-4.mp3",
-      "attribution": "(c) Pete Zani, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "green-frog/green-frog-5.mp3",
-      "attribution": "(c) Annie Wall, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "green-frog/green-frog-6.wav",
-      "attribution": "(c) Becky Elkin, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "green-frog/green-frog-7.mp3",
-      "attribution": "(c) Emily Summerbell, some rights reserved (CC BY)"
     }
   ],
   "pickerel-frog": [
@@ -81,24 +61,12 @@
       "attribution": "USGS Amphibian Research and Monitoring Initiative (ARMI)"
     },
     {
-      "file": "gray-treefrog-complex/gray-treefrog-complex-3.wav",
-      "attribution": "(c) keithandmarchant, some rights reserved (CC BY-NC)"
-    },
-    {
       "file": "gray-treefrog-complex/gray-treefrog-complex-4.mp3",
       "attribution": "(c) Chris Harrison, some rights reserved (CC BY-NC)"
     },
     {
       "file": "gray-treefrog-complex/gray-treefrog-complex-5.mp3",
       "attribution": "(c) sglanville, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "gray-treefrog-complex/gray-treefrog-complex-6.mp3",
-      "attribution": "(c) amelwitte, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "gray-treefrog-complex/gray-treefrog-complex-7.mp3",
-      "attribution": "(c) Chris Harrison, some rights reserved (CC BY-NC)"
     }
   ],
   "spring-peeper": [
@@ -113,18 +81,6 @@
     {
       "file": "spring-peeper/spring-peeper-3.wav",
       "attribution": "(c) hummellsea, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "spring-peeper/spring-peeper-4.mp3",
-      "attribution": "(c) Misha Zitser, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "spring-peeper/spring-peeper-5.mp3",
-      "attribution": "(c) Misha Zitser, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "spring-peeper/spring-peeper-6.wav",
-      "attribution": "(c) Callicladium, some rights reserved (CC BY-NC)"
     }
   ],
   "upland-chorus-frog": [
@@ -163,14 +119,6 @@
       "attribution": "(c) sukoca, some rights reserved (CC BY-NC)"
     },
     {
-      "file": "american-toad/american-toad-4.mp3",
-      "attribution": "(c) Maria Davanzo, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "american-toad/american-toad-5.mp3",
-      "attribution": "(c) Mitch, some rights reserved (CC BY-NC)"
-    },
-    {
       "file": "american-toad/american-toad-6.mp3",
       "attribution": "(c) Pete Zani, some rights reserved (CC BY-NC)"
     }
@@ -183,28 +131,12 @@
     {
       "file": "fowlers-toad/fowlers-toad-2.wav",
       "attribution": "(c) jackandshirley, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "fowlers-toad/fowlers-toad-3.mp3",
-      "attribution": "(c) Misha Zitser, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "fowlers-toad/fowlers-toad-4.mp3",
-      "attribution": "(c) Brookville Park Wildlife, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "fowlers-toad/fowlers-toad-5.mp3",
-      "attribution": "(c) Brookville Park Wildlife, some rights reserved (CC BY-NC)"
     }
   ],
   "eastern-spadefoot": [
     {
       "file": "eastern-spadefoot/eastern-spadefoot-1.wav",
       "attribution": "© Erin Collins / iNaturalist, CC-BY 4.0 (observation #206437801)"
-    },
-    {
-      "file": "eastern-spadefoot/eastern-spadefoot-2.wav",
-      "attribution": "(c) debcushman, some rights reserved (CC BY-NC)"
     },
     {
       "file": "eastern-spadefoot/eastern-spadefoot-3.mp3",
@@ -235,34 +167,6 @@
     {
       "file": "eastern-cricket-frog/eastern-cricket-frog-4.mp3",
       "attribution": "(c) Wayne Fidler, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "eastern-cricket-frog/eastern-cricket-frog-5.mp3",
-      "attribution": "(c) gschuppie, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "eastern-cricket-frog/eastern-cricket-frog-6.mp3",
-      "attribution": "(c) laurenhaskinss, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "eastern-cricket-frog/eastern-cricket-frog-7.mp3",
-      "attribution": "(c) pnorris, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "eastern-cricket-frog/eastern-cricket-frog-8.mp3",
-      "attribution": "(c) varanexan, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "eastern-cricket-frog/eastern-cricket-frog-9.mp3",
-      "attribution": "(c) mkinaturalist, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "eastern-cricket-frog/eastern-cricket-frog-10.wav",
-      "attribution": "(c) Joe MDO, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "eastern-cricket-frog/eastern-cricket-frog-11.wav",
-      "attribution": "(c) Brad Walker, some rights reserved (CC BY-NC)"
     }
   ],
   "coastal-plains-leopard-frog": [
@@ -275,24 +179,8 @@
       "attribution": "(c) carlavitez, some rights reserved (CC BY-NC)"
     },
     {
-      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-3.mp3",
-      "attribution": "(c) James Teitgen, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-4.mp3",
-      "attribution": "(c) Dan Johnson, some rights reserved (CC BY)"
-    },
-    {
       "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-5.mp3",
       "attribution": "(c) adeleaquino, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-6.mp3",
-      "attribution": "(c) adeleaquino, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-7.mp3",
-      "attribution": "(c) Greg Browder, some rights reserved (CC BY-NC)"
     }
   ],
   "barking-treefrog": [

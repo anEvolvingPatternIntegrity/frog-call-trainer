@@ -9,13 +9,17 @@ type PhotoEntry = { file: string; attribution: string; license: string };
 type PhotoManifest = Record<string, { selected: number; photos: PhotoEntry[] }>;
 const photoManifest: PhotoManifest = photoManifestRaw as PhotoManifest;
 
+// All unique species across all regions, deduplicated by id, sorted alphabetically
+const allSpecies: Species[] = Object.values(
+  Object.fromEntries(REGIONS.flatMap((r) => r.species.map((s) => [s.id, s])))
+).sort((a, b) => a.commonName.localeCompare(b.commonName));
+
 export function AdminPage() {
   const navigate = useNavigate();
   const { activeId, isPlaying, toggle } = useSoundboard();
-  const region = REGIONS[0]!;
   const [audioRemoved, setAudioRemoved] = useState<Set<string>>(new Set());
   const [audioOrder, setAudioOrder] = useState<Record<string, string[]>>(() =>
-    Object.fromEntries(region.species.map((s) => [s.id, s.audio.map((a) => a.file)]))
+    Object.fromEntries(allSpecies.map((s) => [s.id, s.audio.map((a) => a.file)]))
   );
   const [photoRemoved, setPhotoRemoved] = useState<Set<string>>(new Set());
   const [selectedPhotos, setSelectedPhotos] = useState<Record<string, number>>(
@@ -92,7 +96,7 @@ export function AdminPage() {
     finally { setBusy(null); }
   }
 
-  const totalAudio = region.species.reduce((n, s) => n + s.audio.filter(a => !audioRemoved.has(a.file)).length, 0);
+  const totalAudio = allSpecies.reduce((n, s) => n + s.audio.filter(a => !audioRemoved.has(a.file)).length, 0);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -117,7 +121,7 @@ export function AdminPage() {
           Run <code className="bg-gray-100 px-1 rounded">node scripts/fetch-photos.mjs</code> to download photos.
         </p>
 
-        {region.species.map(species => {
+        {allSpecies.map(species => {
           const orderedFiles = audioOrder[species.id] ?? species.audio.map((a) => a.file);
           const visibleAudio = orderedFiles
             .map((file) => species.audio.find((a) => a.file === file))
