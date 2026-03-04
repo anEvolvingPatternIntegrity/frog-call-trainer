@@ -25,11 +25,11 @@ export function SpeciesPad({ species, isActive, isPlaying, sampleIndex, onToggle
     <div className="flex flex-col">
 
       {/* Names — fixed height keeps image badges aligned across grid rows */}
-      <div className="pointer-events-none px-0.5 h-[52px] flex flex-col justify-end pb-1.5">
-        <p className="font-bold text-sm sm:text-base text-gray-900 leading-tight">
+      <div className="pointer-events-none px-0.5 h-9 flex flex-col justify-end pb-1">
+        <p className="font-bold text-xs text-gray-900 leading-tight truncate">
           {species.commonName}
         </p>
-        <p className="text-xs italic text-gray-500 leading-tight mt-0.5">
+        <p className="text-[10px] italic text-gray-500 leading-tight mt-0.5 truncate">
           {species.scientificName}
         </p>
       </div>
