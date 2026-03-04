@@ -24,6 +24,11 @@ export function useOfflineCache(region: Region) {
     if (swReady && status === 'unavailable') setStatus('idle');
   }, [swReady, status]);
 
+  // Reset when region changes
+  useEffect(() => {
+    if (swReady) setStatus('idle');
+  }, [region.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
   async function download() {
     const assets: string[] = [];
     for (const species of region.species) {
