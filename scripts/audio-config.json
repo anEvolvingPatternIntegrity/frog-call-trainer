@@ -63,6 +63,154 @@
           "wikiCategories": ["Lithobates sphenocephalus", "Rana sphenocephala"]
         }
       }
+    },
+    "tidewater-virginia": {
+      "species": {
+        "spring-peeper": {
+          "taxonIds": [24268],
+          "scientificName": "Pseudacris crucifer",
+          "wikiCategories": ["Pseudacris crucifer"]
+        },
+        "upland-chorus-frog": {
+          "taxonIds": [24263],
+          "scientificName": "Pseudacris feriarum",
+          "wikiCategories": ["Pseudacris feriarum"]
+        },
+        "american-toad": {
+          "taxonIds": [64968],
+          "scientificName": "Anaxyrus americanus",
+          "wikiCategories": ["Anaxyrus americanus", "Bufo americanus"]
+        },
+        "fowlers-toad": {
+          "taxonIds": [64977],
+          "scientificName": "Anaxyrus fowleri",
+          "wikiCategories": ["Anaxyrus fowleri", "Bufo fowleri"]
+        },
+        "eastern-spadefoot": {
+          "taxonIds": [26695],
+          "scientificName": "Scaphiopus holbrookii",
+          "wikiCategories": ["Scaphiopus holbrookii"]
+        },
+        "eastern-cricket-frog": {
+          "taxonIds": [24233],
+          "scientificName": "Acris crepitans",
+          "wikiCategories": ["Acris crepitans"]
+        },
+        "gray-treefrog-complex": {
+          "taxonIds": [1668922, 1668923],
+          "scientificName": "Hyla versicolor / Hyla chrysoscelis",
+          "wikiCategories": ["Hyla versicolor", "Hyla chrysoscelis"]
+        },
+        "green-frog": {
+          "taxonIds": [65982],
+          "scientificName": "Lithobates clamitans",
+          "wikiCategories": ["Lithobates clamitans", "Rana clamitans"]
+        },
+        "american-bullfrog": {
+          "taxonIds": [65979],
+          "scientificName": "Lithobates catesbeianus",
+          "wikiCategories": ["Lithobates catesbeianus", "Rana catesbeiana"]
+        },
+        "coastal-plains-leopard-frog": {
+          "taxonIds": [60341],
+          "scientificName": "Lithobates sphenocephalus",
+          "wikiCategories": ["Lithobates sphenocephalus", "Rana sphenocephala"]
+        },
+        "green-treefrog": {
+          "taxonIds": [1668858],
+          "scientificName": "Dryophytes cinereus",
+          "wikiCategories": ["Hyla cinerea", "Dryophytes cinereus"]
+        },
+        "barking-treefrog": {
+          "taxonIds": [1668962],
+          "scientificName": "Dryophytes gratiosus",
+          "wikiCategories": ["Hyla gratiosa", "Dryophytes gratiosus"]
+        },
+        "eastern-narrowmouth-toad": {
+          "taxonIds": [25078],
+          "scientificName": "Gastrophryne carolinensis",
+          "wikiCategories": ["Gastrophryne carolinensis"]
+        }
+      }
+    },
+    "coastal-nc": {
+      "species": {
+        "spring-peeper": {
+          "taxonIds": [24268],
+          "scientificName": "Pseudacris crucifer",
+          "wikiCategories": ["Pseudacris crucifer"]
+        },
+        "upland-chorus-frog": {
+          "taxonIds": [24263],
+          "scientificName": "Pseudacris feriarum",
+          "wikiCategories": ["Pseudacris feriarum"]
+        },
+        "southern-chorus-frog": {
+          "taxonIds": [24261],
+          "scientificName": "Pseudacris nigrita",
+          "wikiCategories": ["Pseudacris nigrita"]
+        },
+        "little-grass-frog": {
+          "taxonIds": [24262],
+          "scientificName": "Pseudacris ocularis",
+          "wikiCategories": ["Pseudacris ocularis"]
+        },
+        "fowlers-toad": {
+          "taxonIds": [64977],
+          "scientificName": "Anaxyrus fowleri",
+          "wikiCategories": ["Anaxyrus fowleri", "Bufo fowleri"]
+        },
+        "eastern-spadefoot": {
+          "taxonIds": [26695],
+          "scientificName": "Scaphiopus holbrookii",
+          "wikiCategories": ["Scaphiopus holbrookii"]
+        },
+        "eastern-cricket-frog": {
+          "taxonIds": [24233],
+          "scientificName": "Acris crepitans",
+          "wikiCategories": ["Acris crepitans"]
+        },
+        "gray-treefrog-complex": {
+          "taxonIds": [1668922, 1668923],
+          "scientificName": "Hyla versicolor / Hyla chrysoscelis",
+          "wikiCategories": ["Hyla versicolor", "Hyla chrysoscelis"]
+        },
+        "green-treefrog": {
+          "taxonIds": [1668858],
+          "scientificName": "Dryophytes cinereus",
+          "wikiCategories": ["Hyla cinerea", "Dryophytes cinereus"]
+        },
+        "barking-treefrog": {
+          "taxonIds": [1668962],
+          "scientificName": "Dryophytes gratiosus",
+          "wikiCategories": ["Hyla gratiosa", "Dryophytes gratiosus"]
+        },
+        "squirrel-treefrog": {
+          "taxonIds": [1668859],
+          "scientificName": "Dryophytes squirellus",
+          "wikiCategories": ["Hyla squirella", "Dryophytes squirellus"]
+        },
+        "green-frog": {
+          "taxonIds": [65982],
+          "scientificName": "Lithobates clamitans",
+          "wikiCategories": ["Lithobates clamitans", "Rana clamitans"]
+        },
+        "american-bullfrog": {
+          "taxonIds": [65979],
+          "scientificName": "Lithobates catesbeianus",
+          "wikiCategories": ["Lithobates catesbeianus", "Rana catesbeiana"]
+        },
+        "coastal-plains-leopard-frog": {
+          "taxonIds": [60341],
+          "scientificName": "Lithobates sphenocephalus",
+          "wikiCategories": ["Lithobates sphenocephalus", "Rana sphenocephala"]
+        },
+        "eastern-narrowmouth-toad": {
+          "taxonIds": [25078],
+          "scientificName": "Gastrophryne carolinensis",
+          "wikiCategories": ["Gastrophryne carolinensis"]
+        }
+      }
     }
   }
 }
