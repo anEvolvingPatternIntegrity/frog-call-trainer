@@ -3,15 +3,15 @@
  * Download species photos from Wikimedia Commons and update the photo manifest.
  *
  * Usage:
- *   node scripts/fetch-photos-wiki.mjs [region-id] [--max N] [--dry-run]
+ *   node scripts/fetch-photos-wiki.mjs [--species=id1,id2] [--max N] [--dry-run]
  *
  * Defaults:
- *   region-id : roanoke-valley
+ *   --species : all species in audio-config.json
  *   --max     : 5  (max new downloads per species, across all wikiCategories)
  *
  * Accepted licenses: CC0, CC BY, CC BY-SA (and versioned variants), Public Domain
- * Photos saved to: public/photos/{region-id}/
- * Manifest updated at: src/data/photos/{region-id}.json
+ * Photos saved to: public/photos/{species-id}/
+ * Manifest updated at: src/data/photos.json
  *
  * Files are named: {species-id}-wiki-{n}.{ext}
  */
@@ -25,20 +25,27 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
 const args = process.argv.slice(2);
-const regionId = args.find(a => !a.startsWith('--')) ?? 'roanoke-valley';
+const speciesArg = args.find(a => !a.startsWith('--') ? false : a.startsWith('--species='));
+const speciesArgVal = args.find(a => a.startsWith('--species='))?.split('=')[1];
 const maxNew = parseInt(args.find(a => a.startsWith('--max='))?.split('=')[1] ?? '5');
 const dryRun = args.includes('--dry-run');
 
 const WIKI_API = 'https://commons.wikimedia.org/w/api.php';
-const PHOTO_DIR = path.join(ROOT, 'public', 'photos', regionId);
-const MANIFEST_PATH = path.join(ROOT, 'src', 'data', 'photos', `${regionId}.json`);
+const MANIFEST_PATH = path.join(ROOT, 'src', 'data', 'photos.json');
 const CONFIG_PATH = path.join(__dirname, 'audio-config.json');
 
 const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf-8'));
-const regionConfig = config.regions[regionId];
-if (!regionConfig) { console.error(`No config for region: ${regionId}`); process.exit(1); }
+const allSpecies = config.species;
+if (!allSpecies) { console.error('audio-config.json missing "species" key'); process.exit(1); }
 
-const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf-8'));
+const speciesFilter = speciesArgVal ? new Set(speciesArgVal.split(',')) : null;
+const targetSpecies = speciesFilter
+  ? Object.fromEntries(Object.entries(allSpecies).filter(([id]) => speciesFilter.has(id)))
+  : allSpecies;
+
+const manifest = fs.existsSync(MANIFEST_PATH)
+  ? JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf-8'))
+  : {};
 
 function get(url) {
   return new Promise((resolve, reject) => {
@@ -61,7 +68,6 @@ function getJson(url) {
 function sleep(ms) {
   return new Promise(r => setTimeout(r, ms));
 }
-
 
 function stripHtml(html) {
   if (!html) return '';
@@ -100,8 +106,9 @@ function normalizeExt(url) {
 }
 
 function nextWikiFilename(speciesId, ext) {
-  const existing = fs.existsSync(PHOTO_DIR)
-    ? fs.readdirSync(PHOTO_DIR).filter(f => f.startsWith(`${speciesId}-wiki-`))
+  const photoDir = path.join(ROOT, 'public', 'photos', speciesId);
+  const existing = fs.existsSync(photoDir)
+    ? fs.readdirSync(photoDir).filter(f => f.startsWith(`${speciesId}-wiki-`))
     : [];
   const nums = existing
     .map(f => parseInt(f.match(/-wiki-(\d+)\./)?.[1] ?? '0'))
@@ -111,7 +118,6 @@ function nextWikiFilename(speciesId, ext) {
 }
 
 async function fetchCategoryPage(category, continueToken) {
-  // Request 800px — a standard width that Wikimedia pre-caches, avoiding on-demand generation failures
   let url = `${WIKI_API}?action=query&generator=categorymembers&gcmtitle=Category:${encodeURIComponent(category)}&gcmtype=file&gcmnamespace=6&gcmlimit=20&prop=imageinfo&iiprop=url%7Cextmetadata&iiurlwidth=800&format=json`;
   if (continueToken) url += `&gcmcontinue=${encodeURIComponent(continueToken)}`;
   return getJson(url);
@@ -124,11 +130,10 @@ async function fetchForSpecies(speciesId, cfg) {
     return 0;
   }
 
+  const photoDir = path.join(ROOT, 'public', 'photos', speciesId);
   const entry = manifest[speciesId] ?? { selected: 0, photos: [] };
   const existingFiles = new Set(entry.photos.map(p => p.file));
   let downloaded = 0;
-  // Hard cap on total download attempts per species: avoids infinite loops when
-  // Wikimedia rate-limits (HTTP 429) and every file returns a 2KB error placeholder.
   const maxAttempts = maxNew * 6;
   let attempts = 0;
 
@@ -149,7 +154,6 @@ async function fetchForSpecies(speciesId, cfg) {
         const info = page.imageinfo?.[0];
         if (!info) continue;
 
-        // Skip non-photo files (SVG, TIFF, OGG, PDF, etc.)
         const pageTitle = (page.title ?? '').toLowerCase();
         const titleExt = path.extname(pageTitle);
         if (!['.jpg', '.jpeg', '.png'].includes(titleExt)) continue;
@@ -162,7 +166,7 @@ async function fetchForSpecies(speciesId, cfg) {
         if (!imgUrl) continue;
         const ext = normalizeExt(imgUrl);
         const filename = nextWikiFilename(speciesId, ext);
-        const relFile = `${regionId}/${filename}`;
+        const relFile = `${speciesId}/${filename}`;
         if (existingFiles.has(relFile)) continue;
 
         const artist = stripHtml(meta.Artist?.value ?? meta.Credit?.value ?? 'Wikimedia Commons');
@@ -176,7 +180,7 @@ async function fetchForSpecies(speciesId, cfg) {
           process.stdout.write(`  downloading ${relFile} ... `);
           attempts++;
           try {
-            await sleep(1500); // Wikimedia upload servers rate-limit ~1 req/s for bots
+            await sleep(1500);
             const buf = await get(imgUrl);
             if (buf.length < 5000) {
               console.log(`skipped (${buf.length} bytes — rate-limited or too small)`);
@@ -186,7 +190,7 @@ async function fetchForSpecies(speciesId, cfg) {
               console.log(`skipped (${buf.length} bytes — too large, likely a high-res scan)`);
               continue;
             }
-            fs.mkdirSync(PHOTO_DIR, { recursive: true });
+            fs.mkdirSync(photoDir, { recursive: true });
             fs.writeFileSync(path.join(ROOT, 'public', 'photos', relFile), buf);
             console.log(`${buf.length} bytes`);
 
@@ -211,11 +215,12 @@ async function fetchForSpecies(speciesId, cfg) {
 }
 
 async function main() {
-  console.log(`\nFetching Wikimedia Commons photos for region: ${regionId}`);
+  const speciesList = Object.keys(targetSpecies);
+  console.log(`\nFetching Wikimedia Commons photos for ${speciesList.length} species`);
   console.log(`Max new per species: ${maxNew}${dryRun ? '  [DRY RUN]' : ''}\n`);
 
   let total = 0;
-  for (const [speciesId, cfg] of Object.entries(regionConfig.species)) {
+  for (const [speciesId, cfg] of Object.entries(targetSpecies)) {
     total += await fetchForSpecies(speciesId, cfg);
   }
 

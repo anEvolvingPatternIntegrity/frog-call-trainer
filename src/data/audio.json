@@ -1,0 +1,430 @@
+{
+  "american-bullfrog": [
+    {
+      "file": "american-bullfrog/american-bullfrog-1.mp3",
+      "attribution": "USGS Amphibian Research and Monitoring Initiative (ARMI)"
+    },
+    {
+      "file": "american-bullfrog/american-bullfrog-2.m4a",
+      "attribution": "(c) Sven Eisenbiegler, einige Rechte vorbehalten (CC BY-NC)"
+    },
+    {
+      "file": "american-bullfrog/american-bullfrog-3.mp3",
+      "attribution": "(c) Kat, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "american-bullfrog/american-bullfrog-4.m4a",
+      "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "american-bullfrog/american-bullfrog-5.m4a",
+      "attribution": "(c) Sven Eisenbiegler, einige Rechte vorbehalten (CC BY-NC)"
+    },
+    {
+      "file": "american-bullfrog/american-bullfrog-6.m4a",
+      "attribution": "(c) CarlaCorazza, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "green-frog": [
+    {
+      "file": "green-frog/green-frog-1.mp3",
+      "attribution": "USGS Amphibian Research and Monitoring Initiative (ARMI)"
+    },
+    {
+      "file": "green-frog/green-frog-2.mp3",
+      "attribution": "(c) roy pilcher, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "green-frog/green-frog-3.m4a",
+      "attribution": "(c) David Bree, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "green-frog/green-frog-4.m4a",
+      "attribution": "(c) Pete Zani, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "green-frog/green-frog-5.m4a",
+      "attribution": "(c) Annie Wall, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "green-frog/green-frog-6.wav",
+      "attribution": "(c) Becky Elkin, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "green-frog/green-frog-7.m4a",
+      "attribution": "(c) Emily Summerbell, some rights reserved (CC BY)"
+    }
+  ],
+  "pickerel-frog": [
+    {
+      "file": "pickerel-frog/pickerel-frog-1.m4a",
+      "attribution": "(c) Michelle Lee Delgado, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "wood-frog": [
+    {
+      "file": "wood-frog/wood-frog-1.mp3",
+      "attribution": "USGS Amphibian Research and Monitoring Initiative (ARMI)"
+    },
+    {
+      "file": "wood-frog/wood-frog-2.m4a",
+      "attribution": "(c) cholzapfel, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "gray-treefrog-complex": [
+    {
+      "file": "gray-treefrog-complex/gray-treefrog-complex-1.mp3",
+      "attribution": "USGS Amphibian Research and Monitoring Initiative (ARMI)"
+    },
+    {
+      "file": "gray-treefrog-complex/gray-treefrog-complex-2.mp3",
+      "attribution": "USGS Amphibian Research and Monitoring Initiative (ARMI)"
+    },
+    {
+      "file": "gray-treefrog-complex/gray-treefrog-complex-3.wav",
+      "attribution": "(c) keithandmarchant, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "gray-treefrog-complex/gray-treefrog-complex-4.mp3",
+      "attribution": "(c) Chris Harrison, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "gray-treefrog-complex/gray-treefrog-complex-5.m4a",
+      "attribution": "(c) sglanville, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "gray-treefrog-complex/gray-treefrog-complex-6.m4a",
+      "attribution": "(c) amelwitte, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "gray-treefrog-complex/gray-treefrog-complex-7.mp3",
+      "attribution": "(c) Chris Harrison, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "spring-peeper": [
+    {
+      "file": "spring-peeper/spring-peeper-1.mp3",
+      "attribution": "USGS Amphibian Research and Monitoring Initiative (ARMI)"
+    },
+    {
+      "file": "spring-peeper/spring-peeper-2.m4a",
+      "attribution": "(c) Misha Zitser, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "spring-peeper/spring-peeper-3.wav",
+      "attribution": "(c) hummellsea, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "spring-peeper/spring-peeper-4.m4a",
+      "attribution": "(c) Misha Zitser, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "spring-peeper/spring-peeper-5.m4a",
+      "attribution": "(c) Misha Zitser, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "spring-peeper/spring-peeper-6.wav",
+      "attribution": "(c) Callicladium, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "upland-chorus-frog": [
+    {
+      "file": "upland-chorus-frog/upland-chorus-frog-1.mp3",
+      "attribution": "(c) Dennis Kent, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "upland-chorus-frog/upland-chorus-frog-2.m4a",
+      "attribution": "(c) gracefleshman, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "upland-chorus-frog/upland-chorus-frog-3.mp3",
+      "attribution": "(c) Leila Dasher, some rights reserved (CC BY)"
+    },
+    {
+      "file": "upland-chorus-frog/upland-chorus-frog-4.wav",
+      "attribution": "(c) Tom Field, some rights reserved (CC BY)"
+    },
+    {
+      "file": "upland-chorus-frog/upland-chorus-frog-5.m4a",
+      "attribution": "(c) Nancy Lee Adamson, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "american-toad": [
+    {
+      "file": "american-toad/american-toad-1.mp3",
+      "attribution": "USGS Amphibian Research and Monitoring Initiative (ARMI)"
+    },
+    {
+      "file": "american-toad/american-toad-2.m4a",
+      "attribution": "(c) dezignlady, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "american-toad/american-toad-3.m4a",
+      "attribution": "(c) sukoca, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "american-toad/american-toad-4.m4a",
+      "attribution": "(c) Maria Davanzo, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "american-toad/american-toad-5.mp3",
+      "attribution": "(c) Mitch, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "american-toad/american-toad-6.m4a",
+      "attribution": "(c) Pete Zani, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "fowlers-toad": [
+    {
+      "file": "fowlers-toad/fowlers-toad-1.mp3",
+      "attribution": "© Chris Harrison / iNaturalist, CC-BY-NC 4.0 (observation #917443)"
+    },
+    {
+      "file": "fowlers-toad/fowlers-toad-2.wav",
+      "attribution": "(c) jackandshirley, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "fowlers-toad/fowlers-toad-3.m4a",
+      "attribution": "(c) Misha Zitser, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "fowlers-toad/fowlers-toad-4.m4a",
+      "attribution": "(c) Brookville Park Wildlife, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "fowlers-toad/fowlers-toad-5.m4a",
+      "attribution": "(c) Brookville Park Wildlife, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "eastern-spadefoot": [
+    {
+      "file": "eastern-spadefoot/eastern-spadefoot-1.wav",
+      "attribution": "© Erin Collins / iNaturalist, CC-BY 4.0 (observation #206437801)"
+    },
+    {
+      "file": "eastern-spadefoot/eastern-spadefoot-2.wav",
+      "attribution": "(c) debcushman, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-spadefoot/eastern-spadefoot-3.m4a",
+      "attribution": "(c) cseress, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-spadefoot/eastern-spadefoot-4.m4a",
+      "attribution": "(c) kyejenkins, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-spadefoot/eastern-spadefoot-5.m4a",
+      "attribution": "(c) Kevin Jones, some rights reserved (CC BY)"
+    }
+  ],
+  "eastern-cricket-frog": [
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-1.m4a",
+      "attribution": "no rights reserved (CC0) / iNaturalist observation #266476930"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-2.m4a",
+      "attribution": "(c) malanature, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-3.mp3",
+      "attribution": "(c) Bill Pranty, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-4.m4a",
+      "attribution": "(c) Wayne Fidler, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-5.m4a",
+      "attribution": "(c) gschuppie, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-6.m4a",
+      "attribution": "(c) laurenhaskinss, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-7.m4a",
+      "attribution": "(c) pnorris, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-8.m4a",
+      "attribution": "(c) varanexan, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-9.m4a",
+      "attribution": "(c) mkinaturalist, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-10.wav",
+      "attribution": "(c) Joe MDO, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-cricket-frog/eastern-cricket-frog-11.wav",
+      "attribution": "(c) Brad Walker, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "coastal-plains-leopard-frog": [
+    {
+      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-1.wav",
+      "attribution": "© Mike Tilley / iNaturalist, CC-BY 4.0 (observation #70261132)"
+    },
+    {
+      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-2.m4a",
+      "attribution": "(c) carlavitez, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-3.mp3",
+      "attribution": "(c) James Teitgen, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-4.m4a",
+      "attribution": "(c) Dan Johnson, some rights reserved (CC BY)"
+    },
+    {
+      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-5.m4a",
+      "attribution": "(c) adeleaquino, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-6.m4a",
+      "attribution": "(c) adeleaquino, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-7.m4a",
+      "attribution": "(c) Greg Browder, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "barking-treefrog": [
+    {
+      "file": "barking-treefrog/barking-treefrog-1.m4a",
+      "attribution": "(c) rastabenz, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "barking-treefrog/barking-treefrog-2.m4a",
+      "attribution": "(c) Cole Tiemann, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "barking-treefrog/barking-treefrog-3.m4a",
+      "attribution": "(c) suzieleslie, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "barking-treefrog/barking-treefrog-4.m4a",
+      "attribution": "(c) suzieleslie, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "barking-treefrog/barking-treefrog-5.m4a",
+      "attribution": "(c) frshwtrfan, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "barking-treefrog/barking-treefrog-6.m4a",
+      "attribution": "(c) brassm, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "green-treefrog": [
+    {
+      "file": "green-treefrog/green-treefrog-1.m4a",
+      "attribution": "(c) Adrienne van den Beemt, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "green-treefrog/green-treefrog-2.mpga",
+      "attribution": "(c) Jon McIntyre, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "green-treefrog/green-treefrog-3.m4a",
+      "attribution": "(c) Kevin Martin, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "green-treefrog/green-treefrog-4.m4a",
+      "attribution": "(c) Kaylin Fleenor, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "eastern-narrowmouth-toad": [
+    {
+      "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-1.mp3",
+      "attribution": "(c) Reed Lindwurm, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-2.wav",
+      "attribution": "(c) McCracken Lab, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-3.m4a",
+      "attribution": "(c) Lucas Garriga, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-4.m4a",
+      "attribution": "(c) Randy Herman, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-5.m4a",
+      "attribution": "(c) ethantouchinggrass, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "southern-chorus-frog": [
+    {
+      "file": "southern-chorus-frog/southern-chorus-frog-1.m4a",
+      "attribution": "(c) Don Abrams, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "southern-chorus-frog/southern-chorus-frog-2.wav",
+      "attribution": "(c) Jason L. Poston, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "southern-chorus-frog/southern-chorus-frog-3.m4a",
+      "attribution": "(c) Jake Galla, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "southern-chorus-frog/southern-chorus-frog-4.wav",
+      "attribution": "(c) Paul Marvin, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "southern-chorus-frog/southern-chorus-frog-5.m4a",
+      "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "little-grass-frog": [
+    {
+      "file": "little-grass-frog/little-grass-frog-1.mp3",
+      "attribution": "(c) Nick Newberry, some rights reserved (CC BY)"
+    },
+    {
+      "file": "little-grass-frog/little-grass-frog-2.m4a",
+      "attribution": "(c) D.J. McNeil, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "little-grass-frog/little-grass-frog-3.mp3",
+      "attribution": "(c) malbecker, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "little-grass-frog/little-grass-frog-4.wav",
+      "attribution": "(c) Anthony, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "little-grass-frog/little-grass-frog-5.m4a",
+      "attribution": "(c) dbond, some rights reserved (CC BY-NC)"
+    }
+  ],
+  "squirrel-treefrog": [
+    {
+      "file": "squirrel-treefrog/squirrel-treefrog-1.m4a",
+      "attribution": "(c) nalinem, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "squirrel-treefrog/squirrel-treefrog-2.m4a",
+      "attribution": "(c) kcook, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "squirrel-treefrog/squirrel-treefrog-3.mpga",
+      "attribution": "(c) Jon McIntyre, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "squirrel-treefrog/squirrel-treefrog-4.m4a",
+      "attribution": "(c) Stuart MacMillan, some rights reserved (CC BY-NC)"
+    },
+    {
+      "file": "squirrel-treefrog/squirrel-treefrog-5.mp3",
+      "attribution": "(c) Chris Harrison, some rights reserved (CC BY-NC)"
+    }
+  ]
+}

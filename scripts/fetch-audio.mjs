@@ -3,16 +3,16 @@
  * Bulk-download frog call recordings from iNaturalist and update the audio manifest.
  *
  * Usage:
- *   node scripts/fetch-audio.mjs [region-id] [--max N] [--dry-run]
+ *   node scripts/fetch-audio.mjs [--species=id1,id2] [--max N] [--dry-run]
  *
  * Defaults:
- *   region-id : roanoke-valley
+ *   --species : all species in audio-config.json
  *   --max     : 5  (max new downloads per species)
  *   --dry-run : false
  *
  * Accepted licenses: cc0, cc-by, cc-by-nc
- * Files are saved to: public/audio/{region-id}/
- * Manifest updated at: src/data/audio/{region-id}.json
+ * Files are saved to: public/audio/{species-id}/
+ * Manifest updated at: src/data/audio.json
  */
 
 import fs from 'fs';
@@ -25,23 +25,35 @@ const ROOT = path.resolve(__dirname, '..');
 
 // --- CLI args ---
 const args = process.argv.slice(2);
-const regionId = args.find(a => !a.startsWith('--')) ?? 'roanoke-valley';
+const speciesArg = args.find(a => a.startsWith('--species='))?.split('=')[1];
 const maxNew = parseInt(args.find(a => a.startsWith('--max='))?.split('=')[1] ?? '5');
 const dryRun = args.includes('--dry-run');
 
 const LICENSES = ['cc0', 'cc-by', 'cc-by-nc'];
-const AUDIO_DIR = path.join(ROOT, 'public', 'audio', regionId);
-const MANIFEST_PATH = path.join(ROOT, 'src', 'data', 'audio', `${regionId}.json`);
+const MANIFEST_PATH = path.join(ROOT, 'src', 'data', 'audio.json');
 const CONFIG_PATH = path.join(__dirname, 'audio-config.json');
 
 const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf-8'));
-const regionConfig = config.regions[regionId];
-if (!regionConfig) {
-  console.error(`No config found for region: ${regionId}`);
+const allSpecies = config.species;
+if (!allSpecies) {
+  console.error('audio-config.json missing top-level "species" key');
   process.exit(1);
 }
 
-const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf-8'));
+const speciesFilter = speciesArg ? new Set(speciesArg.split(',')) : null;
+const targetSpecies = speciesFilter
+  ? Object.fromEntries(Object.entries(allSpecies).filter(([id]) => speciesFilter.has(id)))
+  : allSpecies;
+
+if (speciesFilter) {
+  for (const id of speciesFilter) {
+    if (!allSpecies[id]) console.warn(`  WARNING: unknown species id: ${id}`);
+  }
+}
+
+const manifest = fs.existsSync(MANIFEST_PATH)
+  ? JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf-8'))
+  : {};
 
 // --- Helpers ---
 function get(url) {
@@ -68,8 +80,9 @@ function extFrom(url) {
 }
 
 function nextFilename(speciesId, ext) {
-  const existing = fs.existsSync(AUDIO_DIR)
-    ? fs.readdirSync(AUDIO_DIR).filter(f => f.startsWith(`${speciesId}-`))
+  const audioDir = path.join(ROOT, 'public', 'audio', speciesId);
+  const existing = fs.existsSync(audioDir)
+    ? fs.readdirSync(audioDir).filter(f => f.startsWith(`${speciesId}-`))
     : [];
   const nums = existing.map(f => parseInt(f.match(/-(\d+)\./)?.[1] ?? '0')).filter(n => !isNaN(n));
   const next = nums.length > 0 ? Math.max(...nums) + 1 : 1;
@@ -78,6 +91,7 @@ function nextFilename(speciesId, ext) {
 
 // --- Main ---
 async function fetchForSpecies(speciesId, taxonIds) {
+  const audioDir = path.join(ROOT, 'public', 'audio', speciesId);
   const existing = new Set((manifest[speciesId] ?? []).map(a => a.file));
   let downloaded = 0;
 
@@ -101,12 +115,12 @@ async function fetchForSpecies(speciesId, taxonIds) {
           const fileUrl = sound.file_url;
           if (!fileUrl) continue;
 
-          const relFile = `${regionId}/${nextFilename(speciesId, extFrom(fileUrl))}`;
+          const ext = extFrom(fileUrl);
+          const filename = nextFilename(speciesId, ext);
+          const relFile = `${speciesId}/${filename}`;
           const absPath = path.join(ROOT, 'public', 'audio', relFile);
 
-          // Skip if we already have this file or URL
           if (existing.has(relFile)) continue;
-          if ((manifest[speciesId] ?? []).some(a => a.file === relFile)) continue;
 
           const attribution = sound.attribution ?? `iNaturalist observation #${obs.id}`;
 
@@ -146,11 +160,12 @@ async function fetchForSpecies(speciesId, taxonIds) {
 }
 
 async function main() {
-  console.log(`\nFetching audio for region: ${regionId}`);
+  const speciesList = Object.keys(targetSpecies);
+  console.log(`\nFetching audio for ${speciesList.length} species`);
   console.log(`Max new per species: ${maxNew}${dryRun ? '  [DRY RUN]' : ''}\n`);
 
   let total = 0;
-  for (const [speciesId, cfg] of Object.entries(regionConfig.species)) {
+  for (const [speciesId, cfg] of Object.entries(targetSpecies)) {
     total += await fetchForSpecies(speciesId, cfg.taxonIds);
   }
 

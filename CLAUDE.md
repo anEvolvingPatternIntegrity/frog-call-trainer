@@ -1,5 +1,25 @@
 # Frog Call Trainer — Developer Guide
 
+## Asset Structure
+
+Assets are species-scoped (not region-scoped):
+
+```
+public/
+  audio/{species-id}/           e.g. public/audio/american-bullfrog/
+  spectrograms/{species-id}/    e.g. public/spectrograms/american-bullfrog/
+  photos/{species-id}/          e.g. public/photos/american-bullfrog/
+
+src/data/
+  audio.json                    global manifest: species-id → AudioCredit[]
+  photos.json                   global manifest: species-id → {selected, photos[]}
+  withSpeciesData.ts            shared withAudio / withPhoto helpers
+```
+
+Regions are pure species lists — they import `withAudio` and `withPhoto` from `src/data/withSpeciesData.ts`.
+
+---
+
 ## Adding a New Region
 
 ### 1. Define the species list
@@ -77,7 +97,7 @@ export const squirrelTreefrog: Species = {
   id: 'squirrel-treefrog',
   commonName: 'Squirrel Treefrog',
   scientificName: 'Dryophytes squirellus',
-  audio: [],          // populated by audio manifest; leave empty
+  audio: [],          // populated by global audio manifest; leave empty
   photos: [
     {
       url: 'https://upload.wikimedia.org/wikipedia/commons/...',
@@ -89,43 +109,18 @@ export const squirrelTreefrog: Species = {
 };
 ```
 
-- `audio: []` is fine — the region manifest overrides it via `withAudio()`.
-- Wikimedia Commons photo URLs are fallbacks; the fetch-photos scripts will produce locally-hosted versions.
+- `audio: []` is fine — `withAudio()` in `withSpeciesData.ts` fills it from `src/data/audio.json`.
+- Wikimedia Commons photo URLs are fallbacks; the fetch-photos scripts produce locally-hosted versions.
 
 ### 4. Create the region file
 
 `src/data/regions/{region-id}.ts`:
 
 ```ts
-import type { Region, Species } from '../../types';
+import type { Region } from '../../types';
 import { springPeeper } from '../species/spring-peeper';
 // ... all species imports
-import audioManifest from '../audio/{region-id}.json';
-import photoManifestRaw from '../photos/{region-id}.json';
-
-type AudioManifest = typeof audioManifest;
-type PhotoEntry = { file: string; attribution: string; license: string };
-type PhotoManifest = Record<string, { selected: number; photos: PhotoEntry[] }>;
-const photoManifest = photoManifestRaw as PhotoManifest;
-
-function withAudio(species: Species): Species {
-  const audio = audioManifest[species.id as keyof AudioManifest];
-  return audio ? { ...species, audio } : species;
-}
-
-function withPhoto(species: Species): Species {
-  const entry = photoManifest[species.id as keyof PhotoManifest];
-  if (!entry?.photos?.length) return species;
-  const photo = entry.photos[entry.selected ?? 0];
-  if (!photo) return species;
-  return {
-    ...species,
-    photos: [
-      { url: `/photos/${photo.file}`, attribution: photo.attribution, license: photo.license },
-      ...species.photos,
-    ],
-  };
-}
+import { withAudio, withPhoto } from '../withSpeciesData';
 
 export const myRegion: Region = {
   id: '{region-id}',
@@ -137,37 +132,32 @@ export const myRegion: Region = {
 };
 ```
 
-### 5. Create empty manifests
+No per-region manifest imports needed — `withAudio` and `withPhoto` read from the global `src/data/audio.json` and `src/data/photos.json`.
 
-```bash
-echo '{}' > src/data/audio/{region-id}.json
-echo '{}' > src/data/photos/{region-id}.json
-```
+### 5. Add any new species to `scripts/audio-config.json`
 
-### 6. Add to `scripts/audio-config.json`
-
-Add a new entry under `"regions"`. Use the verified taxon IDs from step 2:
+The config is a flat species map (no region nesting). If all species for the new region already exist in the config, nothing to add. For new species:
 
 ```json
-"my-region": {
+{
   "species": {
-    "spring-peeper": {
-      "taxonIds": [24268],
-      "scientificName": "Pseudacris crucifer",
-      "wikiCategories": ["Pseudacris crucifer"]
+    "my-new-species": {
+      "taxonIds": [12345],
+      "scientificName": "Genus species",
+      "wikiCategories": ["Genus species"]
     }
   }
 }
 ```
 
-### 7. Register in `src/data/index.ts`
+### 6. Register in `src/data/index.ts`
 
 ```ts
 import { myRegion } from './regions/my-region';
 export const REGIONS = [roanokeValley, tidewaterVirginia, myRegion];
 ```
 
-### 8. Build check
+### 7. Build check
 
 ```bash
 npm run build
@@ -175,21 +165,30 @@ npm run build
 
 Fix any TypeScript errors before continuing.
 
-### 9. Fetch audio — **run only once per region**
+### 8. Fetch audio for new species only
 
 ```bash
-node scripts/fetch-audio.mjs {region-id}
+node scripts/fetch-audio.mjs --species=my-new-species
 ```
 
-**Critical:** Running this a second time for a region will download duplicates for every species already in the manifest (different filenames, same audio). If you need to fix taxon IDs and re-fetch, first delete the downloaded audio files and clear the manifest back to `{}`.
+Omitting `--species` fetches for all species in the config. The script is safe to re-run; it only downloads files not already in the manifest.
 
-### 10. Generate spectrograms
+### 9. Generate spectrograms
 
 ```bash
-node scripts/gen-spectrograms.mjs {region-id}
+node scripts/gen-spectrograms.mjs
 ```
 
-The script skips files where a PNG already exists, so re-running is safe.
+Processes all `public/audio/{species-id}/` dirs. Skips files where a PNG already exists, so re-running is safe.
+
+### 10. Fetch photos for new species only
+
+```bash
+node scripts/fetch-photos-wiki.mjs --species=my-new-species
+node scripts/fetch-photos.mjs --species=my-new-species
+```
+
+Omitting `--species` fetches for all species. Safe to re-run.
 
 ### 11. Review in admin panel
 

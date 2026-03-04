@@ -6,14 +6,17 @@ import type { IncomingMessage, ServerResponse } from 'http';
 /**
  * Dev-only Vite plugin for the /admin page.
  *
- * POST /api/admin/remove-audio  { regionId, speciesId, file }
- *   → deletes public/audio/{file}, removes entry from audio JSON
+ * POST /api/admin/remove-audio  { speciesId, file }
+ *   → deletes public/audio/{file}, removes entry from src/data/audio.json
  *
- * POST /api/admin/select-photo  { regionId, speciesId, index }
- *   → updates "selected" index in photo JSON
+ * POST /api/admin/reorder-audio { speciesId, file, direction }
+ *   → reorders entry in src/data/audio.json
  *
- * POST /api/admin/remove-photo  { regionId, speciesId, file }
- *   → deletes public/photos/{file}, removes entry from photo JSON,
+ * POST /api/admin/select-photo  { speciesId, index }
+ *   → updates "selected" index in src/data/photos.json
+ *
+ * POST /api/admin/remove-photo  { speciesId, file }
+ *   → deletes public/photos/{file}, removes entry from src/data/photos.json,
  *     adjusts selected index if needed
  *
  * Vite HMR picks up all JSON changes automatically.
@@ -38,6 +41,9 @@ export function audioAdminPlugin(): Plugin {
     res.end(JSON.stringify({ error: String(err) }));
   }
 
+  const AUDIO_MANIFEST = path.join(process.cwd(), 'src', 'data', 'audio.json');
+  const PHOTO_MANIFEST = path.join(process.cwd(), 'src', 'data', 'photos.json');
+
   return {
     name: 'audio-admin',
     apply: 'serve',
@@ -50,28 +56,25 @@ export function audioAdminPlugin(): Plugin {
           const url = req.url ?? '';
 
           if (url === '/remove-audio') {
-            const { regionId, speciesId, file } = body as { regionId: string; speciesId: string; file: string };
+            const { speciesId, file } = body as { speciesId: string; file: string };
             const audioPath = path.join(process.cwd(), 'public', 'audio', file);
             if (fs.existsSync(audioPath)) fs.unlinkSync(audioPath);
 
-            const manifestPath = path.join(process.cwd(), 'src', 'data', 'audio', `${regionId}.json`);
-            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8')) as Record<string, Array<{ file: string }>>;
+            const manifest = JSON.parse(fs.readFileSync(AUDIO_MANIFEST, 'utf-8')) as Record<string, Array<{ file: string }>>;
             if (manifest[speciesId]) manifest[speciesId] = manifest[speciesId].filter(a => a.file !== file);
-            fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+            fs.writeFileSync(AUDIO_MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
             ok(res);
 
           } else if (url === '/select-photo') {
-            const { regionId, speciesId, index } = body as { regionId: string; speciesId: string; index: number };
-            const manifestPath = path.join(process.cwd(), 'src', 'data', 'photos', `${regionId}.json`);
-            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8')) as Record<string, { selected: number; photos: unknown[] }>;
+            const { speciesId, index } = body as { speciesId: string; index: number };
+            const manifest = JSON.parse(fs.readFileSync(PHOTO_MANIFEST, 'utf-8')) as Record<string, { selected: number; photos: unknown[] }>;
             if (manifest[speciesId]) manifest[speciesId].selected = index;
-            fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+            fs.writeFileSync(PHOTO_MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
             ok(res);
 
           } else if (url === '/reorder-audio') {
-            const { regionId, speciesId, file, direction } = body as { regionId: string; speciesId: string; file: string; direction: 'up' | 'down' };
-            const manifestPath = path.join(process.cwd(), 'src', 'data', 'audio', `${regionId}.json`);
-            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8')) as Record<string, Array<{ file: string }>>;
+            const { speciesId, file, direction } = body as { speciesId: string; file: string; direction: 'up' | 'down' };
+            const manifest = JSON.parse(fs.readFileSync(AUDIO_MANIFEST, 'utf-8')) as Record<string, Array<{ file: string }>>;
             const arr = manifest[speciesId];
             if (arr) {
               const idx = arr.findIndex((a) => a.file === file);
@@ -80,16 +83,15 @@ export function audioAdminPlugin(): Plugin {
                 [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
               }
             }
-            fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+            fs.writeFileSync(AUDIO_MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
             ok(res);
 
           } else if (url === '/remove-photo') {
-            const { regionId, speciesId, file } = body as { regionId: string; speciesId: string; file: string };
+            const { speciesId, file } = body as { speciesId: string; file: string };
             const photoPath = path.join(process.cwd(), 'public', 'photos', file);
             if (fs.existsSync(photoPath)) fs.unlinkSync(photoPath);
 
-            const manifestPath = path.join(process.cwd(), 'src', 'data', 'photos', `${regionId}.json`);
-            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8')) as Record<string, { selected: number; photos: Array<{ file: string }> }>;
+            const manifest = JSON.parse(fs.readFileSync(PHOTO_MANIFEST, 'utf-8')) as Record<string, { selected: number; photos: Array<{ file: string }> }>;
             const entry = manifest[speciesId];
             if (entry) {
               const idx = entry.photos.findIndex(p => p.file === file);
@@ -98,7 +100,7 @@ export function audioAdminPlugin(): Plugin {
                 if (entry.selected >= entry.photos.length) entry.selected = Math.max(0, entry.photos.length - 1);
               }
             }
-            fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+            fs.writeFileSync(PHOTO_MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
             ok(res);
 
           } else {

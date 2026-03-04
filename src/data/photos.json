@@ -1,0 +1,407 @@
+{
+  "american-bullfrog": {
+    "selected": 3,
+    "photos": [
+      {
+        "file": "american-bullfrog/american-bullfrog-wiki-4.jpg",
+        "attribution": "USFWS Mountain Prairie / Wikimedia Commons, Public domain",
+        "license": "Public domain"
+      },
+      {
+        "file": "american-bullfrog/american-bullfrog-wiki-5.jpg",
+        "attribution": "USFWS Mountain Prairie / Wikimedia Commons, Public domain",
+        "license": "Public domain"
+      },
+      {
+        "file": "american-bullfrog/american-bullfrog-wiki-6.jpg",
+        "attribution": "USFWS Mountain Prairie / Wikimedia Commons, Public domain",
+        "license": "Public domain"
+      },
+      {
+        "file": "american-bullfrog/american-bullfrog-wiki-7.jpg",
+        "attribution": "Rusty Clark - Back In One Piece from merritt usland FLA / Wikimedia Commons, CC BY 2.0",
+        "license": "CC BY 2.0"
+      },
+      {
+        "file": "american-bullfrog/american-bullfrog-wiki-8.jpg",
+        "attribution": "B a y L e e ' s 8 Legged Art / Wikimedia Commons, CC BY-SA 2.0",
+        "license": "CC BY-SA 2.0"
+      },
+      {
+        "file": "american-bullfrog/american-bullfrog-wiki-9.jpg",
+        "attribution": "Jarek Tuszyński / Wikimedia Commons, CC BY-SA 3.0",
+        "license": "CC BY-SA 3.0"
+      },
+      {
+        "file": "american-bullfrog/american-bullfrog-wiki-10.jpg",
+        "attribution": "Thomas Brown / Wikimedia Commons, CC BY 2.0",
+        "license": "CC BY 2.0"
+      },
+      {
+        "file": "american-bullfrog/american-bullfrog-wiki-11.png",
+        "attribution": "B kimmel / Wikimedia Commons, CC BY-SA 4.0",
+        "license": "CC BY-SA 4.0"
+      }
+    ]
+  },
+  "green-frog": {
+    "selected": 2,
+    "photos": [
+      {
+        "file": "green-frog/green-frog-photo-1.jpg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "green-frog/green-frog-photo-2.jpeg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "green-frog/green-frog-photo-3.jpeg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "green-frog/green-frog-photo-4.jpeg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "green-frog/green-frog-photo-5.jpeg",
+        "attribution": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "pickerel-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "pickerel-frog/pickerel-frog-photo-1.jpeg",
+        "attribution": "(c) J.D. Willson, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "pickerel-frog/pickerel-frog-photo-5.jpg",
+        "attribution": "(c) belyykit, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "wood-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "wood-frog/wood-frog-wiki-1.jpg",
+        "attribution": "MichaelZahniser / Wikimedia Commons, Public domain",
+        "license": "Public domain"
+      },
+      {
+        "file": "wood-frog/wood-frog-wiki-2.jpg",
+        "attribution": "Brian Gratwicke / Wikimedia Commons, CC BY 2.0",
+        "license": "CC BY 2.0"
+      },
+      {
+        "file": "wood-frog/wood-frog-wiki-3.jpg",
+        "attribution": "Brian Gratwicke / Wikimedia Commons, CC BY 2.0",
+        "license": "CC BY 2.0"
+      },
+      {
+        "file": "wood-frog/wood-frog-wiki-4.png",
+        "attribution": "Derivative work: Craig Pemberton at en.wikipedia Original: United States Geological Survey / Wikimedia Commons, CC BY-SA 3.0",
+        "license": "CC BY-SA 3.0"
+      }
+    ]
+  },
+  "gray-treefrog-complex": {
+    "selected": 1,
+    "photos": [
+      {
+        "file": "gray-treefrog-complex/gray-treefrog-complex-photo-4.jpg",
+        "attribution": "(c) Amber Miller, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "gray-treefrog-complex/gray-treefrog-complex-photo-5.jpg",
+        "attribution": "(c) Patrick Coin, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "spring-peeper": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "spring-peeper/spring-peeper-photo-4.jpg",
+        "attribution": "(c) rereedy, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "spring-peeper/spring-peeper-wiki-3.jpg",
+        "attribution": "USGS / Wikimedia Commons, Public domain",
+        "license": "Public domain"
+      },
+      {
+        "file": "spring-peeper/spring-peeper-wiki-4.jpg",
+        "attribution": "USGS / Wikimedia Commons, Public domain",
+        "license": "Public domain"
+      }
+    ]
+  },
+  "upland-chorus-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "upland-chorus-frog/upland-chorus-frog-photo-1.jpg",
+        "attribution": "(c) Amber Miller, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "upland-chorus-frog/upland-chorus-frog-photo-2.jpg",
+        "attribution": "(c) kerakis, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "american-toad": {
+    "selected": 1,
+    "photos": [
+      {
+        "file": "american-toad/american-toad-photo-5.jpg",
+        "attribution": "(c) Jay Heiser, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "american-toad/american-toad-wiki-2.jpg",
+        "attribution": "Andrey Zharkikh from Salt Lake City, USA / Wikimedia Commons, CC BY 2.0",
+        "license": "CC BY 2.0"
+      }
+    ]
+  },
+  "fowlers-toad": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "fowlers-toad/fowlers-toad-photo-1.jpeg",
+        "attribution": "(c) Hayden Al Harash, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "eastern-spadefoot": {
+    "selected": 2,
+    "photos": [
+      {
+        "file": "eastern-spadefoot/eastern-spadefoot-photo-1.jpeg",
+        "attribution": "(c) Adam Gabriel, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "eastern-spadefoot/eastern-spadefoot-photo-3.jpg",
+        "attribution": "(c) Ken-ichi Ueda, some rights reserved (CC BY)",
+        "license": "cc-by"
+      },
+      {
+        "file": "eastern-spadefoot/eastern-spadefoot-photo-5.jpg",
+        "attribution": "(c) Riley Stanton, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "eastern-cricket-frog": {
+    "selected": 1,
+    "photos": [
+      {
+        "file": "eastern-cricket-frog/eastern-cricket-frog-photo-4.jpg",
+        "attribution": "(c) jonmorr, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "eastern-cricket-frog/eastern-cricket-frog-photo-5.jpg",
+        "attribution": "(c) G. L. Dearman, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "coastal-plains-leopard-frog": {
+    "selected": 5,
+    "photos": [
+      {
+        "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-photo-1.jpg",
+        "attribution": "(c) benmf, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-photo-2.jpg",
+        "attribution": "(c) Dave Almquist, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-photo-3.jpg",
+        "attribution": "(c) jaypcavecrawler, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-photo-4.jpg",
+        "attribution": "(c) jaypcavecrawler, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-photo-5.jpg",
+        "attribution": "(c) Thomas Shahan, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-wiki-1.jpg",
+        "attribution": "Bob Warrick / Wikimedia Commons, CC BY-SA 4.0",
+        "license": "CC BY-SA 4.0"
+      },
+      {
+        "file": "coastal-plains-leopard-frog/coastal-plains-leopard-frog-wiki-2.jpg",
+        "attribution": "Bob Warrick / Wikimedia Commons, CC BY-SA 4.0",
+        "license": "CC BY-SA 4.0"
+      }
+    ]
+  },
+  "barking-treefrog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "barking-treefrog/barking-treefrog-wiki-1.jpg",
+        "attribution": "Fredlyfish4 / Wikimedia Commons, CC BY-SA 3.0",
+        "license": "CC BY-SA 3.0"
+      }
+    ]
+  },
+  "eastern-narrowmouth-toad": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-photo-1.jpg",
+        "attribution": "(c) bonesbugsandharmony, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-photo-2.jpg",
+        "attribution": "(c) Kory Roberts, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-photo-3.jpeg",
+        "attribution": "(c) J.D. Willson, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-photo-4.jpeg",
+        "attribution": "(c) turbofox_fl, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "eastern-narrowmouth-toad/eastern-narrowmouth-toad-photo-5.jpeg",
+        "attribution": "(c) turbofox_fl, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "green-treefrog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "green-treefrog/green-treefrog-wiki-1.jpg",
+        "attribution": "Northern Prairie Wildlife Research Center; Cropped and color-modified by Neutrality. / Wikimedia Commons, Public domain",
+        "license": "Public domain"
+      }
+    ]
+  },
+  "little-grass-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "little-grass-frog/little-grass-frog-photo-1.jpg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "little-grass-frog/little-grass-frog-photo-2.jpg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "little-grass-frog/little-grass-frog-photo-3.jpg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "little-grass-frog/little-grass-frog-photo-4.jpg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "little-grass-frog/little-grass-frog-photo-5.jpg",
+        "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "southern-chorus-frog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "southern-chorus-frog/southern-chorus-frog-photo-1.jpg",
+        "attribution": "(c) coolthings, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "southern-chorus-frog/southern-chorus-frog-photo-2.jpg",
+        "attribution": "(c) coolthings, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "southern-chorus-frog/southern-chorus-frog-photo-3.jpg",
+        "attribution": "(c) coolthings, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "southern-chorus-frog/southern-chorus-frog-photo-4.jpeg",
+        "attribution": "(c) Jonathon Bolton, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "southern-chorus-frog/southern-chorus-frog-photo-5.jpeg",
+        "attribution": "(c) Jonathon Bolton, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  },
+  "squirrel-treefrog": {
+    "selected": 0,
+    "photos": [
+      {
+        "file": "squirrel-treefrog/squirrel-treefrog-photo-1.jpeg",
+        "attribution": "(c) Morgan Stickrod, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "squirrel-treefrog/squirrel-treefrog-photo-2.jpeg",
+        "attribution": "(c) Rosie, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "squirrel-treefrog/squirrel-treefrog-photo-3.jpg",
+        "attribution": "(c) Gerry Salmon, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "squirrel-treefrog/squirrel-treefrog-photo-4.jpg",
+        "attribution": "(c) eignagni, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      },
+      {
+        "file": "squirrel-treefrog/squirrel-treefrog-photo-5.jpg",
+        "attribution": "(c) eignagni, some rights reserved (CC BY-NC)",
+        "license": "cc-by-nc"
+      }
+    ]
+  }
+}

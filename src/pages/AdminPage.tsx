@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import type { AudioCredit, Species } from '../types';
 import { REGIONS } from '../data';
 import { useSoundboard } from '../hooks/useSoundboard';
-import photoManifestRaw from '../data/photos/roanoke-valley.json';
+import photoManifestRaw from '../data/photos.json';
 
 type PhotoEntry = { file: string; attribution: string; license: string };
 type PhotoManifest = Record<string, { selected: number; photos: PhotoEntry[] }>;
@@ -44,7 +44,7 @@ export function AdminPage() {
   async function handleMoveAudio(species: Species, file: string, direction: 'up' | 'down') {
     setBusy(`audio-move:${file}`); setError(null);
     try {
-      await post('reorder-audio', { regionId: region.id, speciesId: species.id, file, direction });
+      await post('reorder-audio', { speciesId: species.id, file, direction });
       setAudioOrder((prev) => {
         const order = [...(prev[species.id] ?? [])];
         const idx = order.indexOf(file);
@@ -62,7 +62,7 @@ export function AdminPage() {
     const key = `audio:${audio.file}`;
     setBusy(key); setError(null);
     try {
-      await post('remove-audio', { regionId: region.id, speciesId: species.id, file: audio.file });
+      await post('remove-audio', { speciesId: species.id, file: audio.file });
       setAudioRemoved(prev => new Set([...prev, audio.file]));
     } catch (err) { setError(String(err)); }
     finally { setBusy(null); }
@@ -72,7 +72,7 @@ export function AdminPage() {
     const key = `photo-select:${species.id}`;
     setBusy(key); setError(null);
     try {
-      await post('select-photo', { regionId: region.id, speciesId: species.id, index });
+      await post('select-photo', { speciesId: species.id, index });
       setSelectedPhotos(prev => ({ ...prev, [species.id]: index }));
     } catch (err) { setError(String(err)); }
     finally { setBusy(null); }
@@ -82,7 +82,7 @@ export function AdminPage() {
     const key = `photo-rm:${photo.file}`;
     setBusy(key); setError(null);
     try {
-      await post('remove-photo', { regionId: region.id, speciesId: species.id, file: photo.file });
+      await post('remove-photo', { speciesId: species.id, file: photo.file });
       setPhotoRemoved(prev => new Set([...prev, photo.file]));
       // If we removed the selected photo, reset selection to 0
       const remaining = (photoManifest[species.id]?.photos ?? []).filter(p => !photoRemoved.has(p.file) && p.file !== photo.file);

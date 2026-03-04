@@ -3,15 +3,15 @@
  * Bulk-download frog species photos from iNaturalist and update the photo manifest.
  *
  * Usage:
- *   node scripts/fetch-photos.mjs [region-id] [--max N] [--dry-run]
+ *   node scripts/fetch-photos.mjs [--species=id1,id2] [--max N] [--dry-run]
  *
  * Defaults:
- *   region-id : roanoke-valley
+ *   --species : all species in audio-config.json
  *   --max     : 5  (max new downloads per species)
  *
  * Accepted licenses: cc0, cc-by, cc-by-nc
- * Photos saved to: public/photos/{region-id}/
- * Manifest updated at: src/data/photos/{region-id}.json
+ * Photos saved to: public/photos/{species-id}/
+ * Manifest updated at: src/data/photos.json
  */
 
 import fs from 'fs';
@@ -23,20 +23,26 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
 const args = process.argv.slice(2);
-const regionId = args.find(a => !a.startsWith('--')) ?? 'roanoke-valley';
+const speciesArg = args.find(a => a.startsWith('--species='))?.split('=')[1];
 const maxNew = parseInt(args.find(a => a.startsWith('--max='))?.split('=')[1] ?? '5');
 const dryRun = args.includes('--dry-run');
 
 const LICENSES = ['cc0', 'cc-by', 'cc-by-nc'];
-const PHOTO_DIR = path.join(ROOT, 'public', 'photos', regionId);
-const MANIFEST_PATH = path.join(ROOT, 'src', 'data', 'photos', `${regionId}.json`);
-const CONFIG_PATH = path.join(__dirname, 'audio-config.json'); // reuses same taxon IDs
+const MANIFEST_PATH = path.join(ROOT, 'src', 'data', 'photos.json');
+const CONFIG_PATH = path.join(__dirname, 'audio-config.json');
 
 const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf-8'));
-const regionConfig = config.regions[regionId];
-if (!regionConfig) { console.error(`No config for region: ${regionId}`); process.exit(1); }
+const allSpecies = config.species;
+if (!allSpecies) { console.error('audio-config.json missing "species" key'); process.exit(1); }
 
-const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf-8'));
+const speciesFilter = speciesArg ? new Set(speciesArg.split(',')) : null;
+const targetSpecies = speciesFilter
+  ? Object.fromEntries(Object.entries(allSpecies).filter(([id]) => speciesFilter.has(id)))
+  : allSpecies;
+
+const manifest = fs.existsSync(MANIFEST_PATH)
+  ? JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf-8'))
+  : {};
 
 function get(url) {
   return new Promise((resolve, reject) => {
@@ -61,8 +67,9 @@ function mediumUrl(squareUrl) {
 }
 
 function nextFilename(speciesId, ext) {
-  const existing = fs.existsSync(PHOTO_DIR)
-    ? fs.readdirSync(PHOTO_DIR).filter(f => f.startsWith(`${speciesId}-photo-`))
+  const photoDir = path.join(ROOT, 'public', 'photos', speciesId);
+  const existing = fs.existsSync(photoDir)
+    ? fs.readdirSync(photoDir).filter(f => f.startsWith(`${speciesId}-photo-`))
     : [];
   const nums = existing
     .map(f => parseInt(f.match(/-photo-(\d+)\./)?.[1] ?? '0'))
@@ -72,6 +79,7 @@ function nextFilename(speciesId, ext) {
 }
 
 async function fetchForSpecies(speciesId, taxonIds) {
+  const photoDir = path.join(ROOT, 'public', 'photos', speciesId);
   const entry = manifest[speciesId] ?? { selected: 0, photos: [] };
   const existingFiles = new Set(entry.photos.map(p => p.file));
   let downloaded = 0;
@@ -98,7 +106,7 @@ async function fetchForSpecies(speciesId, taxonIds) {
           const imgUrl = mediumUrl(squareUrl);
           const ext = path.extname(imgUrl.split('?')[0]) || '.jpg';
           const filename = nextFilename(speciesId, ext);
-          const relFile = `${regionId}/${filename}`;
+          const relFile = `${speciesId}/${filename}`;
 
           if (existingFiles.has(relFile)) continue;
 
@@ -115,7 +123,7 @@ async function fetchForSpecies(speciesId, taxonIds) {
                 console.log(`skipped (${buf.length} bytes — too small)`);
                 continue;
               }
-              fs.mkdirSync(PHOTO_DIR, { recursive: true });
+              fs.mkdirSync(photoDir, { recursive: true });
               fs.writeFileSync(path.join(ROOT, 'public', 'photos', relFile), buf);
               console.log(`${buf.length} bytes`);
 
@@ -139,11 +147,12 @@ async function fetchForSpecies(speciesId, taxonIds) {
 }
 
 async function main() {
-  console.log(`\nFetching photos for region: ${regionId}`);
+  const speciesList = Object.keys(targetSpecies);
+  console.log(`\nFetching iNaturalist photos for ${speciesList.length} species`);
   console.log(`Max new per species: ${maxNew}${dryRun ? '  [DRY RUN]' : ''}\n`);
 
   let total = 0;
-  for (const [speciesId, cfg] of Object.entries(regionConfig.species)) {
+  for (const [speciesId, cfg] of Object.entries(targetSpecies)) {
     total += await fetchForSpecies(speciesId, cfg.taxonIds);
   }
 
