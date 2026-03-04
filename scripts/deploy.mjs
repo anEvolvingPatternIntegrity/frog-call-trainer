@@ -74,14 +74,6 @@ for (const dir of ['audio', 'spectrograms', 'photos']) {
       --delete`);
 }
 
-// Fix content-type for .m4a files (aws cli may default to application/octet-stream)
-run(`aws s3 cp s3://${bucket}/audio/ s3://${bucket}/audio/
-    --recursive
-    --exclude "*" --include "*.m4a"
-    --content-type "audio/mp4"
-    --metadata-directive REPLACE
-    --profile ${PROFILE}`);
-
 // 4. Remaining files (e.g. public root files, favicon, etc.) — 1 hour cache
 console.log('\n── 4. Other files (1-hour cache) ─────────────────────────────────');
 s3(`sync dist/ s3://${bucket}/
