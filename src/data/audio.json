@@ -11,14 +11,6 @@
     {
       "file": "american-bullfrog/american-bullfrog-3.mp3",
       "attribution": "(c) Kat, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "american-bullfrog/american-bullfrog-5.mp3",
-      "attribution": "(c) Sven Eisenbiegler, einige Rechte vorbehalten (CC BY-NC)"
-    },
-    {
-      "file": "american-bullfrog/american-bullfrog-6.mp3",
-      "attribution": "(c) CarlaCorazza, some rights reserved (CC BY-NC)"
     }
   ],
   "green-frog": [
@@ -91,10 +83,6 @@
     {
       "file": "upland-chorus-frog/upland-chorus-frog-2.mp3",
       "attribution": "(c) gracefleshman, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "upland-chorus-frog/upland-chorus-frog-3.mp3",
-      "attribution": "(c) Leila Dasher, some rights reserved (CC BY)"
     },
     {
       "file": "upland-chorus-frog/upland-chorus-frog-4.wav",
@@ -185,46 +173,22 @@
   ],
   "barking-treefrog": [
     {
-      "file": "barking-treefrog/barking-treefrog-1.mp3",
-      "attribution": "(c) rastabenz, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "barking-treefrog/barking-treefrog-2.mp3",
-      "attribution": "(c) Cole Tiemann, some rights reserved (CC BY-NC)"
-    },
-    {
       "file": "barking-treefrog/barking-treefrog-3.mp3",
       "attribution": "(c) suzieleslie, some rights reserved (CC BY-NC)"
     },
     {
-      "file": "barking-treefrog/barking-treefrog-4.mp3",
-      "attribution": "(c) suzieleslie, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "barking-treefrog/barking-treefrog-5.mp3",
-      "attribution": "(c) frshwtrfan, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "barking-treefrog/barking-treefrog-6.mp3",
-      "attribution": "(c) brassm, some rights reserved (CC BY-NC)"
+      "file": "barking-treefrog/barking-treefrog-2.mp3",
+      "attribution": "(c) Cole Tiemann, some rights reserved (CC BY-NC)"
     }
   ],
   "green-treefrog": [
     {
-      "file": "green-treefrog/green-treefrog-1.mp3",
-      "attribution": "(c) Adrienne van den Beemt, some rights reserved (CC BY-NC)"
+      "file": "green-treefrog/green-treefrog-4.mp3",
+      "attribution": "(c) Kaylin Fleenor, some rights reserved (CC BY-NC)"
     },
     {
       "file": "green-treefrog/green-treefrog-2.mpga",
       "attribution": "(c) Jon McIntyre, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "green-treefrog/green-treefrog-3.mp3",
-      "attribution": "(c) Kevin Martin, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "green-treefrog/green-treefrog-4.mp3",
-      "attribution": "(c) Kaylin Fleenor, some rights reserved (CC BY-NC)"
     }
   ],
   "eastern-narrowmouth-toad": [
@@ -255,30 +219,14 @@
       "attribution": "(c) Don Abrams, some rights reserved (CC BY-NC)"
     },
     {
-      "file": "southern-chorus-frog/southern-chorus-frog-2.wav",
-      "attribution": "(c) Jason L. Poston, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "southern-chorus-frog/southern-chorus-frog-3.mp3",
-      "attribution": "(c) Jake Galla, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "southern-chorus-frog/southern-chorus-frog-4.wav",
-      "attribution": "(c) Paul Marvin, some rights reserved (CC BY-NC)"
-    },
-    {
       "file": "southern-chorus-frog/southern-chorus-frog-5.mp3",
       "attribution": "(c) Ty Smith, some rights reserved (CC BY-NC)"
     }
   ],
   "little-grass-frog": [
     {
-      "file": "little-grass-frog/little-grass-frog-1.mp3",
-      "attribution": "(c) Nick Newberry, some rights reserved (CC BY)"
-    },
-    {
-      "file": "little-grass-frog/little-grass-frog-2.mp3",
-      "attribution": "(c) D.J. McNeil, some rights reserved (CC BY-NC)"
+      "file": "little-grass-frog/little-grass-frog-5.mp3",
+      "attribution": "(c) dbond, some rights reserved (CC BY-NC)"
     },
     {
       "file": "little-grass-frog/little-grass-frog-3.mp3",
@@ -287,10 +235,6 @@
     {
       "file": "little-grass-frog/little-grass-frog-4.wav",
       "attribution": "(c) Anthony, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "little-grass-frog/little-grass-frog-5.mp3",
-      "attribution": "(c) dbond, some rights reserved (CC BY-NC)"
     }
   ],
   "squirrel-treefrog": [
@@ -301,14 +245,6 @@
     {
       "file": "squirrel-treefrog/squirrel-treefrog-2.mp3",
       "attribution": "(c) kcook, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "squirrel-treefrog/squirrel-treefrog-3.mpga",
-      "attribution": "(c) Jon McIntyre, some rights reserved (CC BY-NC)"
-    },
-    {
-      "file": "squirrel-treefrog/squirrel-treefrog-4.mp3",
-      "attribution": "(c) Stuart MacMillan, some rights reserved (CC BY-NC)"
     },
     {
       "file": "squirrel-treefrog/squirrel-treefrog-5.mp3",
