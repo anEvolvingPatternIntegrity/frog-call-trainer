@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { AudioCredit } from '../types';
 import { useAudio } from '../hooks/useAudio';
 import { SpectrogramDisplay } from './SpectrogramDisplay';
@@ -9,11 +9,41 @@ interface Props {
   onAnotherSample?: () => void;
   hasMultipleSamples?: boolean;
   spectrogramSrc?: string;
+  stopPlayback?: boolean;
 }
 
-export function AudioPlayer({ audioFile, showAnotherSample, onAnotherSample, hasMultipleSamples, spectrogramSrc }: Props) {
-  const { toggle, isPlaying, isLoaded, audioRef } = useAudio(audioFile.file);
-  const [showSpectrogram, setShowSpectrogram] = useState(false);
+export function AudioPlayer({ audioFile, showAnotherSample, onAnotherSample, hasMultipleSamples, spectrogramSrc, stopPlayback }: Props) {
+  const { toggle, play, pause, isPlaying, isLoaded, audioRef } = useAudio(audioFile.file);
+  const [showSpectrogram, setShowSpectrogram] = useState(!!spectrogramSrc);
+  const autoPlayRef = useRef(false);
+  const isFirstRender = useRef(true);
+
+  // Auto-play on question/sample change (but not on initial mount)
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    autoPlayRef.current = true;
+  }, [audioFile.file]);
+
+  // Auto-play when a new sample loads
+  useEffect(() => {
+    if (isLoaded && autoPlayRef.current) {
+      autoPlayRef.current = false;
+      play();
+    }
+  }, [isLoaded, play]);
+
+  // Stop playback when an answer is submitted
+  useEffect(() => {
+    if (stopPlayback) pause();
+  }, [stopPlayback, pause]);
+
+  function handleAnotherSample() {
+    if (isPlaying) pause();
+    onAnotherSample?.();
+  }
 
   // Auto-play when audio file changes
   useEffect(() => {
@@ -24,8 +54,16 @@ export function AudioPlayer({ audioFile, showAnotherSample, onAnotherSample, has
     <div className="flex flex-col items-center gap-3 w-full">
       {/* Spectrogram strip */}
       {spectrogramSrc && showSpectrogram && (
-        <div className="relative w-full h-24 rounded-lg overflow-hidden bg-black">
-          <SpectrogramDisplay imageSrc={spectrogramSrc} audioRef={audioRef} />
+        <div className="w-full space-y-1">
+          <div className="relative w-full h-24 rounded-lg overflow-hidden bg-black">
+            <SpectrogramDisplay imageSrc={spectrogramSrc} audioRef={audioRef} />
+          </div>
+          <button
+            onClick={() => setShowSpectrogram(false)}
+            className="text-xs text-gray-400 hover:text-gray-600 underline w-full text-right pr-1 focus:outline-none"
+          >
+            Hide spectrogram
+          </button>
         </div>
       )}
 
@@ -58,20 +96,13 @@ export function AudioPlayer({ audioFile, showAnotherSample, onAnotherSample, has
           )}
         </button>
 
-        {/* Spectrogram toggle button */}
-        {spectrogramSrc && (
+        {/* Show spectrogram button — only when hidden */}
+        {spectrogramSrc && !showSpectrogram && (
           <button
-            onClick={() => setShowSpectrogram((v) => !v)}
-            aria-label={showSpectrogram ? 'Hide spectrogram' : 'Show spectrogram'}
-            title={showSpectrogram ? 'Hide spectrogram' : 'Show spectrogram'}
-            className={`
-              w-10 h-10 flex items-center justify-center rounded-full text-sm font-bold
-              transition-colors focus:outline-none focus:ring-2 focus:ring-green-400
-              ${showSpectrogram
-                ? 'bg-green-200 text-green-800 hover:bg-green-300'
-                : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-              }
-            `}
+            onClick={() => setShowSpectrogram(true)}
+            aria-label="Show spectrogram"
+            title="Show spectrogram"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-green-400"
           >
             <WaveformIcon />
           </button>
@@ -80,7 +111,7 @@ export function AudioPlayer({ audioFile, showAnotherSample, onAnotherSample, has
 
       {showAnotherSample && hasMultipleSamples && onAnotherSample && (
         <button
-          onClick={onAnotherSample}
+          onClick={handleAnotherSample}
           className="text-sm text-green-700 underline hover:text-green-900 focus:outline-none focus:ring-2 focus:ring-green-400 rounded"
         >
           Hear another sample
