@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { QuizMode } from '../types';
 import { REGIONS } from '../data';
@@ -23,6 +23,15 @@ export function QuizPage() {
   // Test mode: collect tester name before starting
   const [testerName, setTesterName] = useState('');
   const [quizStarted, setQuizStarted] = useState(mode === 'training');
+  const [isStarting, setIsStarting] = useState(false);
+
+  function beginTest() {
+    setIsStarting(true);
+    setTimeout(() => {
+      setIsStarting(false);
+      setQuizStarted(true);
+    }, 800);
+  }
 
   const {
     session,
@@ -38,10 +47,22 @@ export function QuizPage() {
     restart,
   } = useQuiz(region!, mode, hostName, quizStarted ? testerName : undefined);
 
+  // Auto-advance in test mode after answering
+  useEffect(() => {
+    if (mode !== 'test' || !isAnswered) return;
+    const t = setTimeout(nextQuestion, 800);
+    return () => clearTimeout(t);
+  }, [isAnswered, mode, nextQuestion]);
+
   // Name entry form for test mode
   if (!quizStarted && mode === 'test') {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-emerald-100 flex items-center justify-center p-6">
+        {isStarting ? (
+          <div className="flex justify-center py-8">
+            <div className="w-8 h-8 rounded-full border-4 border-green-200 border-t-green-600 animate-spin" />
+          </div>
+        ) : (
         <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm space-y-5">
           <div>
             <h2 className="text-xl font-semibold text-gray-800">
@@ -61,20 +82,21 @@ export function QuizPage() {
               type="text"
               value={testerName}
               onChange={(e) => setTesterName(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter' && testerName.trim()) setQuizStarted(true); }}
+              onKeyDown={(e) => { if (e.key === 'Enter' && testerName.trim()) beginTest(); }}
               placeholder="Enter your name"
               autoFocus
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
             />
           </div>
           <button
-            onClick={() => setQuizStarted(true)}
+            onClick={beginTest}
             disabled={!testerName.trim()}
             className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl text-base transition-colors focus:outline-none focus:ring-4 focus:ring-green-400 disabled:opacity-50"
           >
             Begin Test
           </button>
         </div>
+        )}
       </div>
     );
   }
@@ -158,10 +180,11 @@ export function QuizPage() {
             <p className="text-sm text-gray-500 font-medium">Listen and identify the call</p>
             <AudioPlayer
               audioFile={currentQuestion.audioFile}
-              showAnotherSample={mode === 'training'}
+              showAnotherSample={true}
               hasMultipleSamples={currentQuestion.species.audio.length > 1}
               onAnotherSample={getAnotherSample}
               spectrogramSrc={mode === 'training' ? '/spectrograms/' + currentQuestion.audioFile.file.replace(/\.[^.]+$/, '.png') : undefined}
+              stopPlayback={isAnswered}
             />
           </div>
 
@@ -176,6 +199,13 @@ export function QuizPage() {
             />
           )}
 
+          {/* Test mode: spinner during auto-advance delay */}
+          {isAnswered && mode === 'test' && (
+            <div className="flex justify-center py-8">
+              <div className="w-8 h-8 rounded-full border-4 border-green-200 border-t-green-600 animate-spin" />
+            </div>
+          )}
+
           {/* Post-answer: feedback, reveal, and next button */}
           {isAnswered && (
             <div className="space-y-3">
@@ -186,14 +216,14 @@ export function QuizPage() {
                     correctName={currentQuestion.species.commonName}
                   />
                   <SpeciesReveal species={currentQuestion.species} />
+                  <button
+                    onClick={nextQuestion}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl text-base transition-colors focus:outline-none focus:ring-4 focus:ring-green-400"
+                  >
+                    {session.currentIndex < total - 1 ? 'Next Question →' : 'See Score'}
+                  </button>
                 </>
               )}
-              <button
-                onClick={nextQuestion}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl text-base transition-colors focus:outline-none focus:ring-4 focus:ring-green-400"
-              >
-                {session.currentIndex < total - 1 ? 'Next Question →' : mode === 'test' ? 'See Results' : 'See Score'}
-              </button>
             </div>
           )}
         </div>
