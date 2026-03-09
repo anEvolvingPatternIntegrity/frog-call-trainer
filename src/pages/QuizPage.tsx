@@ -177,7 +177,7 @@ export function QuizPage() {
 
           {/* Audio card */}
           <div className="bg-white rounded-2xl shadow-sm border border-green-100 p-6 flex flex-col items-center gap-3">
-            <p className="text-sm text-gray-500 font-medium">Listen and identify the call</p>
+            <p className="text-sm text-gray-500 font-medium">Listen and identify the most prominent species calling</p>
             <AudioPlayer
               audioFile={currentQuestion.audioFile}
               showAnotherSample={true}
